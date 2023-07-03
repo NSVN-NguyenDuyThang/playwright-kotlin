@@ -13,8 +13,8 @@ class Checkbox(override var page: Page, private val checkboxWrapper: String) : B
 
     internal fun check(label: String) {
         val targetCheckbox: Locator = page.locator(checkboxWrapper).filter(Locator.FilterOptions().setHas(page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
-        val checkboxLabel: Locator? = targetCheckbox.locator("//span[text()]")
-        val checkboxInput: Locator? = targetCheckbox.locator("//input")
+        val checkboxLabel: Locator? = targetCheckbox.locator(LABEL)
+        val checkboxInput: Locator? = targetCheckbox.locator(INPUT)
         highlightElement(targetCheckbox)
         if (checkboxInput?.isChecked == false) {
             checkboxLabel?.click()
@@ -23,12 +23,18 @@ class Checkbox(override var page: Page, private val checkboxWrapper: String) : B
 
     internal fun uncheck(label: String) {
         val targetCheckbox: Locator = page.locator(checkboxWrapper).filter(Locator.FilterOptions().setHas(page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
-        val checkboxLabel: Locator? = targetCheckbox.locator("//span[text()]")
-        val checkboxInput: Locator? = targetCheckbox.locator("//input")
+        val checkboxLabel: Locator? = targetCheckbox.locator(LABEL)
+        val checkboxInput: Locator? = targetCheckbox.locator(INPUT)
         highlightElement(targetCheckbox)
         if (checkboxInput?.isChecked == true) {
             checkboxLabel?.click()
         }
     }
+
+    companion object {
+        private const val LABEL = "//span[text()]"
+        private const val INPUT = "//input"
+    }
+
 
 }
