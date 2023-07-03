@@ -3,7 +3,7 @@ package shou.browser
 import com.microsoft.playwright.Browser
 import com.microsoft.playwright.BrowserType.LaunchOptions
 import com.microsoft.playwright.Playwright
-import shou.common.GlobalConstants
+import shou.GlobalConstants
 import java.nio.file.Paths
 
 enum class BrowserFactory {

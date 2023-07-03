@@ -1,11 +1,15 @@
-package shou.common
+package shou
 
 import com.microsoft.playwright.*
 import io.qameta.allure.Allure
 import org.testng.ITestResult
 import org.testng.annotations.*
 import shou.browser.BrowserManager
-import shou.page.mobile.ccg.Ccg007Page
+import shou.common.mobile.BasePageMobile
+import shou.browser.PageFactory
+import shou.common.model.EmployeeLogin
+import shou.common.web.BasePage
+import shou.page.mobile.ccg.Ccg007MobilePage
 import shou.path.PathList
 import java.awt.Toolkit
 import java.io.ByteArrayInputStream
@@ -20,7 +24,7 @@ open class BaseTest {
     protected lateinit var browser: Browser
     private lateinit var browserContext: BrowserContext
     protected lateinit var page: Page
-    private lateinit var ccg007Mobile: Ccg007Page
+    private lateinit var ccg007Mobile: Ccg007MobilePage
     @BeforeSuite
     @Parameters("contractCD", "contractPW", "companyCode", "employeeCode", "employeePW", "domain")
     fun beforeSuite(
@@ -139,12 +143,24 @@ open class BaseTest {
         return PageFactory.createInstance(page, basePage)
     }
 
+    protected fun<T : BasePage> createInstance(basePage: Class<T>) : T {
+        return PageFactory.createInstance(page, basePage)
+    }
+
     protected fun loginUkMobile() {
-        ccg007Mobile = createInstance<Ccg007Page>(Ccg007Page::class.java)
+        ccg007Mobile = createInstance(Ccg007MobilePage::class.java)
         page.waitForTimeout(5000.0)
         ccg007Mobile.switchToDeviceMode()
         ccg007Mobile.inputContract(contractCode, contractPW)
         ccg007Mobile.inputCompany(companyCode, employeeCode, employeePW)
+    }
+
+    protected fun loginWithDefault() {
+
+    }
+
+    protected fun loginWith(emp: EmployeeLogin) {
+
     }
 
     companion object {

@@ -1,9 +1,9 @@
 package shou.page.mobile.kaf
 
-import shou.common.BasePageMobile
-import shou.common.elememt.card.CardComponent
-import shou.common.element.datetimepicker.DateTimePicker
-import shou.common.element.switchbtn.SwitchBtnElement
+import shou.common.mobile.BasePageMobile
+import shou.common.mobile.element.card.CardComponent
+import shou.common.mobile.element.datetimepicker.DateTimePicker
+import shou.common.mobile.element.switchbtn.SwitchBtnElement
 import shou.common.model.PeriodTime
 import shou.page.mobile.kaf.model.StampApplication
 

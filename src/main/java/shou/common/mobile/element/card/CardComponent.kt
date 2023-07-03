@@ -1,25 +1,11 @@
-package shou.common.elememt.card
+package shou.common.mobile.element.card
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
-import shou.common.BasePageMobile
-import shou.common.CommonUI
+import shou.common.mobile.BasePageMobile
+import shou.common.mobile.CommonUI
 
-class CardComponent : BasePageMobile {
-    private var cardHeader: String?
-    private var wrapperComp: Locator? = null
-
-    constructor(page: Page, cardHeader: String) {
-        setPage(page)
-        this.cardHeader = cardHeader
-    }
-
-    constructor(cardHeader: String?, wrapperComp: Locator?) {
-        setPage(page)
-        this.cardHeader = cardHeader
-        this.wrapperComp = wrapperComp
-    }
-
+class CardComponent(override var page: Page, private var cardHeader: String, private var wrapperComp: Locator? = null) : BasePageMobile() {
     fun getCardBody(): Locator {
         return if (wrapperComp != null) {
             wrapperComp!!.locator(String.format(CommonUI.CARD_BODY_BY_HEADER, cardHeader))

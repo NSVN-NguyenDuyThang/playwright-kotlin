@@ -1,16 +1,10 @@
-package shou.common.element.datetimepicker
+package shou.common.mobile.element.datetimepicker
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
-import shou.common.BasePageMobile
+import shou.common.mobile.BasePageMobile
 
-class DateTimePicker(page: Page, input: Locator) : BasePageMobile() {
-    private val input: Locator
-
-    init {
-        setPage(page)
-        this.input = input
-    }
+class DateTimePicker(override var page: Page, private val input: Locator) : BasePageMobile() {
 
     fun inputValue(value: String?) {
         removeReadonlyAttr()

@@ -2,7 +2,7 @@ package shou.retryconfig
 
 import org.testng.IRetryAnalyzer
 import org.testng.ITestResult
-import shou.common.GlobalConstants
+import shou.GlobalConstants
 
 class RetryTestFailed : IRetryAnalyzer {
     private var retryCount = 0

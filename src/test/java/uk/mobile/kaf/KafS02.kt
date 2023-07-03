@@ -2,7 +2,7 @@ package uk.mobile.kaf
 
 import org.testng.annotations.BeforeClass
 import org.testng.annotations.Test
-import shou.common.BaseTest
+import shou.BaseTest
 import shou.common.model.PeriodTime
 import shou.page.mobile.kaf.KafS02Page
 import shou.page.mobile.kaf.model.DivisionType

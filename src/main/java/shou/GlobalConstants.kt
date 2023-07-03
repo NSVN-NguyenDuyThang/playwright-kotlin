@@ -1,9 +1,9 @@
-package shou.common
+package shou
 
 import java.io.File
 
 object GlobalConstants {
-    val projectPath = System.getProperty("user.dir")
+    private val projectPath: String = System.getProperty("user.dir")
     val recordVideo: String? = projectPath + File.separator + "record-video"
     val downloadPath: String? = projectPath + File.separator + "downloadFile"
     val uploadFile: String? = projectPath + File.separator + "uploadFile"

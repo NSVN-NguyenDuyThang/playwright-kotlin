@@ -1,9 +1,9 @@
 package shou.page.mobile.ccg
 
 import com.microsoft.playwright.options.LoadState
-import shou.common.BasePageMobile
+import shou.common.mobile.BasePageMobile
 
-class Ccg007Page : BasePageMobile() {
+class Ccg007MobilePage() : BasePageMobile() {
     fun inputContract(contractCode: String?, contractPW: String?) {
         fillToElement("#contractCode >> input", contractCode)
         fillToElement("#password >> input", contractPW)
