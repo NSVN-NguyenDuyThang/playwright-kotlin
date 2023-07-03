@@ -5,8 +5,8 @@ import com.microsoft.playwright.Playwright
 import java.util.*
 
 object BrowserManager {
-    fun browser(playwright: Playwright, browserType: String): Browser {
+    fun browser(playwright: Playwright, browserType: String, webMode: Boolean): Browser {
         return BrowserFactory.valueOf(browserType.uppercase(Locale.getDefault()))
-            .createInstance(playwright)
+            .createInstance(playwright, webMode)
     }
 }

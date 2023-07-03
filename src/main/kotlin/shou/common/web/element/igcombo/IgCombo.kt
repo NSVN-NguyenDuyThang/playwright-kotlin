@@ -65,9 +65,9 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
     }
 
     private fun clickToCombobox(): String {
-        val igComboId: String = setAttribute(page.locator(comboBoxWrapper), "id", DataFaker.generateFakeAlphaNumeric(10))
+        val igComboId: String = DataFaker.generateFakeAlphaNumeric(10)
+        setAttribute(page.locator(comboBoxWrapper), "id", igComboId)
         clickToElement(comboBoxWrapper)
-        page.waitForTimeout(1000.0)
         return igComboId
     }
 

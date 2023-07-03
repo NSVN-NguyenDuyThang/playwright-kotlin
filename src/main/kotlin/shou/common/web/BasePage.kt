@@ -96,7 +96,7 @@ open class BasePage {
      * @param textRsId
      * @return
      */
-    internal fun getTextResource(textRsId: String?): String? {
+    internal fun getTextResource(textRsId: String): String {
         val handle = page.evaluateHandle(String.format("() => nts.uk.resource.getText('%s')", textRsId))
         return handle.toString()
     }
@@ -123,8 +123,8 @@ open class BasePage {
         page.waitForFunction("() => document.readyState == 'complete'")
     }
 
-    protected fun setAttribute(locator: Locator, attribute: String, value: String): String {
-        return locator.evaluate(String.format("ele => ele.setAttribute('%s', '%s')", attribute, value)).toString()
+    protected fun setAttribute(locator: Locator, attribute: String, value: String) {
+        locator.evaluate("ele => ele.setAttribute('$attribute', '$value')")
     }
 
     /**
@@ -133,7 +133,7 @@ open class BasePage {
      * @param locator
      */
     protected fun highlightElement(locator: Locator) {
-        val originalStyle = locator.getAttribute("style")
+        val originalStyle: String = locator.getAttribute("style") ?: ""
         setAttribute(locator, "style", "border: 2px solid red; border-style: dashed;");
         page.waitForTimeout(500.0)
         setAttribute(locator, "style", originalStyle)
@@ -144,7 +144,7 @@ open class BasePage {
      * @param selector
      */
     protected fun highlightElement(selector: String?) {
-        val originalStyle = page.getAttribute(selector, "style")
+        val originalStyle : String = page.getAttribute(selector, "style") ?: ""
         page.evalOnSelector(
             selector,
             "ele => ele.setAttribute('style', 'border: 2px solid red; border-style: dashed;')"
@@ -159,7 +159,7 @@ open class BasePage {
      * @param dynamicValues
      */
     protected fun highlightElement(selector: String, vararg dynamicValues: String?) {
-        val originalStyle = page.getAttribute(getDynamicSelector(selector, *dynamicValues), "style")
+        val originalStyle = page.getAttribute(getDynamicSelector(selector, *dynamicValues), "style") ?: ""
         page.evalOnSelector(
             getDynamicSelector(selector, *dynamicValues),
             "ele => ele.setAttribute('style', 'border: 2px solid red; border-style: dashed;')"
