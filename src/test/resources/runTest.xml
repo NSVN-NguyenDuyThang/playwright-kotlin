@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite  name="UK" parallel = "tests" thread-count="4" >
+	<parameter name ="contractCD" value ="000000000004" />
+	<parameter name ="contractPW" value ="0" />
+	<parameter name ="companyCode" value ="0004" />
+	<parameter name ="employeeCode" value ="00000005" />
+	<parameter name ="employeePW" value ="0" />
+	<parameter name ="domain" value = "http://192.168.100.249:400/" />
+	<parameter name ="mode" value="mobile"/>
+
+	<listeners>
+		<listener class-name ="shou.reportconfig.AllureTestListener"/>
+<!-- 		<listener class-name ="shou.retryconfig.RetryListener"/> -->
+	</listeners>
+	
+	<test name="Run on Chrome Batch 1">
+		<parameter name ="browser" value ="chromium" />
+		<classes>
+			<class name="uk.mobile.kaf.KafS02"></class>
+		</classes>
+	</test>
+</suite>

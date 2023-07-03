@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    stages {
+        stage('Setup Param'){
+            steps {
+                setupParam()
+            }
+        }
+		
+		stage('Run Test') {
+		    steps{
+			    runTest()
+            }
+		}
+		
+		stage('Show Report') {
+		    steps{
+			   showReport()
+            }
+		}
+    }
+}
+
+def setupParam(){
+    
+}
+
+def runTest(){
+    try{
+        bat 'mvn clean test'
+    }
+    catch(Exception ex){
+        echo "Failed"
+    }
+}
+def showReport(){
+   allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+}
