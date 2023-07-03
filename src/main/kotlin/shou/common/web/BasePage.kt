@@ -78,7 +78,7 @@ open class BasePage {
         page.close()
     }
 
-    private fun getDynamicSelector(selector: String, vararg dynamicValues: String?): String? {
+    private fun getDynamicSelector(selector: String, vararg dynamicValues: String?): String {
         return String.format(selector, *dynamicValues as Array<Any?>)
     }
 
@@ -106,13 +106,9 @@ open class BasePage {
      * @param messageId
      * @return
      */
-    internal fun getMessageResource(messageId: String?): String? {
+    internal fun getMessageResource(messageId: String): String {
         val handle = page.evaluateHandle(String.format("() => nts.uk.resource.getMessage('%s')", messageId))
         return handle.toString()
-    }
-
-    internal fun waitForJSLoadedSuccess() {
-        page.waitForFunction("() => document.readyState == 'complete'")
     }
 
     /**
@@ -125,6 +121,10 @@ open class BasePage {
 
     protected fun setAttribute(locator: Locator, attribute: String, value: String) {
         locator.evaluate("ele => ele.setAttribute('$attribute', '$value')")
+    }
+
+    protected fun removeAttribute(locator: Locator, attribute: String) {
+        locator.evaluate("ele => ele.removeAttribute('$attribute')")
     }
 
     /**
