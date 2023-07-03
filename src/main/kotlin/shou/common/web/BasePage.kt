@@ -123,6 +123,10 @@ open class BasePage {
         page.waitForFunction("() => document.readyState == 'complete'")
     }
 
+    protected fun setAttribute(locator: Locator, attribute: String, value: String): String {
+        return locator.evaluate(String.format("ele => ele.setAttribute('%s', '%s')", attribute, value)).toString()
+    }
+
     /**
      * Highlight element before interact
      *
@@ -130,9 +134,9 @@ open class BasePage {
      */
     protected fun highlightElement(locator: Locator) {
         val originalStyle = locator.getAttribute("style")
-        locator.evaluate("ele => ele.setAttribute('style', 'border: 2px solid red; border-style: dashed;')")
+        setAttribute(locator, "style", "border: 2px solid red; border-style: dashed;");
         page.waitForTimeout(500.0)
-        locator.evaluate(String.format("ele => ele.setAttribute('style', '%s')", originalStyle))
+        setAttribute(locator, "style", originalStyle)
     }
 
     /**
@@ -216,7 +220,7 @@ open class BasePage {
         page.dblclick(getDynamicSelector(selector, *dynamicValues))
     }
 
-    protected fun getElementInnerText(locator: Locator): String? {
+    protected fun getElementInnerText(locator: Locator): String {
         highlightElement(locator)
         return locator.innerText()
     }
