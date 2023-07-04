@@ -297,9 +297,20 @@ open class BasePage {
     internal fun clickToButton(textRsId: String) {
         clickToButtonName(getTextResource(textRsId))
     }
-    @Step("ボタン「{1}」をクリックする")
-    internal fun clickToButtonName(text: String) {
+    @Step("ボタン「{0}」をクリックする")
+    private fun clickToButtonName(text: String) {
         clickToElement(CommonUI.BUTTON, text)
         takeScreenshot(String.format("ボタン「$text」をクリックする"));
     }
+
+    internal fun clickToButton(frame: FrameLocator, textRsId: String) {
+        clickToButtonInFrame(frame, getTextResource(textRsId))
+    }
+
+    @Step("ボタン「{1}」をクリックする")
+    private fun clickToButtonInFrame(frame: FrameLocator, text: String) {
+        clickToElement(frame.locator(String.format(CommonUI.BUTTON, text)))
+        takeScreenshot(String.format("ボタン「$text」をクリックする"));
+    }
+
 }
