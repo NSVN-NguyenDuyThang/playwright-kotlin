@@ -120,8 +120,8 @@ open class BasePage {
         page.waitForFunction("() => document.readyState == 'complete'")
     }
 
-    protected fun setAttribute(locator: Locator, attribute: String, value: String) {
-        locator.evaluate("ele => ele.setAttribute('$attribute', '$value')")
+    protected fun setAttribute(locator: Locator?, attribute: String, value: String) {
+        locator?.evaluate("ele => ele.setAttribute('$attribute', '$value')")
     }
 
     protected fun removeAttribute(locator: Locator, attribute: String) {
@@ -133,8 +133,8 @@ open class BasePage {
      *
      * @param locator
      */
-    protected fun highlightElement(locator: Locator) {
-        val originalStyle: String = locator.getAttribute("style") ?: ""
+    protected fun highlightElement(locator: Locator?) {
+        val originalStyle: String = locator?.getAttribute("style") ?: ""
         setAttribute(locator, "style", "border: 2px solid red; border-style: dashed;");
         page.waitForTimeout(500.0)
         setAttribute(locator, "style", originalStyle)
@@ -181,9 +181,9 @@ open class BasePage {
         page.fill(selector, value)
     }
 
-    protected fun fillToElement(locator: Locator, value: String?) {
+    protected fun fillToElement(locator: Locator?, value: String?) {
         highlightElement(locator)
-        locator.fill(value)
+        locator?.fill(value)
     }
 
     protected fun clickToElement(selector: String?) {
@@ -196,9 +196,9 @@ open class BasePage {
         page.click(getDynamicSelector(selector, *dynamicValues))
     }
 
-    protected fun clickToElement(locator: Locator) {
+    protected fun clickToElement(locator: Locator?) {
         highlightElement(locator)
-        locator.click()
+        locator?.click()
     }
 
     protected fun clickToButtonUsingJs(locator: Locator) {
@@ -226,8 +226,8 @@ open class BasePage {
         return locator.innerText()
     }
 
-    protected fun getElementAttribute(locator: Locator, attribute: String): String? {
-        return locator.getAttribute(attribute)
+    protected fun getElementAttribute(locator: Locator?, attribute: String): String? {
+        return locator?.getAttribute(attribute)
     }
 
     protected fun getElementAttribute(selector: String, attribute: String): String {

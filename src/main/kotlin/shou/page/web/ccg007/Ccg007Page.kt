@@ -4,6 +4,7 @@ import com.microsoft.playwright.FrameLocator
 import com.microsoft.playwright.PlaywrightException
 import shou.common.web.BasePage
 import shou.common.web.element.checkbox.Checkbox
+import shou.common.web.element.datepicker.DatePicker
 import shou.common.web.element.igcombo.IgCombo
 
 class Ccg007Page() : BasePage() {
@@ -14,6 +15,8 @@ class Ccg007Page() : BasePage() {
         fillToElement(contractDlg.locator(CONTRACT_CD), contractCD)
         fillToElement(contractDlg.locator(CONTRACT_PW), contractPW)
         clickToElement(contractDlg.locator(LOGIN_BTN))
+        DatePicker(page, "").input("")
+        DatePicker(page, "", page.frameLocator("")).input("")
     }
 
     internal fun companyLogin(companyCD: String, employeeCD: String, employeePW: String) {

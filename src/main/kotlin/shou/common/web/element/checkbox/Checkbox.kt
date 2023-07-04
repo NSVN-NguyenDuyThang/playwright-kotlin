@@ -1,5 +1,6 @@
 package shou.common.web.element.checkbox
 
+import com.microsoft.playwright.FrameLocator
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
 import shou.common.web.BasePage
@@ -11,8 +12,14 @@ import shou.common.web.BasePage
  */
 class Checkbox(override var page: Page, private val checkboxWrapper: String) : BasePage() {
 
+    private var frame : FrameLocator? = null
+    private var wrapperLocator : Locator? = null
+        get() = (frame?.locator(checkboxWrapper) ?: page.locator(checkboxWrapper))
+    constructor(page: Page, checkboxWrapper: String, frame: FrameLocator) : this(page, checkboxWrapper) {
+        this.frame = frame
+    }
     internal fun check(label: String) {
-        val targetCheckbox: Locator = page.locator(checkboxWrapper).filter(Locator.FilterOptions().setHas(page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
+        val targetCheckbox: Locator = wrapperLocator?.filter(Locator.FilterOptions().setHas(frame?.getByText(label) ?: page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
         val checkboxLabel: Locator? = targetCheckbox.locator(LABEL)
         val checkboxInput: Locator? = targetCheckbox.locator(INPUT)
         highlightElement(targetCheckbox)
@@ -22,7 +29,7 @@ class Checkbox(override var page: Page, private val checkboxWrapper: String) : B
     }
 
     internal fun uncheck(label: String) {
-        val targetCheckbox: Locator = page.locator(checkboxWrapper).filter(Locator.FilterOptions().setHas(page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
+        val targetCheckbox: Locator = wrapperLocator?.filter(Locator.FilterOptions().setHas(frame?.getByText(label) ?: page.getByText(label))) ?: throw NoSuchElementException(String.format("Could not find check box with label [%s]", label))
         val checkboxLabel: Locator? = targetCheckbox.locator(LABEL)
         val checkboxInput: Locator? = targetCheckbox.locator(INPUT)
         highlightElement(targetCheckbox)
