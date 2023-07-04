@@ -7,6 +7,7 @@ import com.microsoft.playwright.Page.GoBackOptions
 import com.microsoft.playwright.options.WaitForSelectorState
 import com.microsoft.playwright.options.WaitUntilState
 import io.qameta.allure.Allure
+import io.qameta.allure.Step
 import java.io.ByteArrayInputStream
 
 /**
@@ -97,7 +98,7 @@ open class BasePage {
      * @return
      */
     internal fun getTextResource(textRsId: String): String {
-        val handle = page.evaluateHandle(String.format("() => nts.uk.resource.getText('%s')", textRsId))
+        val handle = page.evaluateHandle("() => nts.uk.resource.getText('$textRsId')")
         return handle.toString()
     }
 
@@ -107,7 +108,7 @@ open class BasePage {
      * @return
      */
     internal fun getMessageResource(messageId: String): String {
-        val handle = page.evaluateHandle(String.format("() => nts.uk.resource.getMessage('%s')", messageId))
+        val handle = page.evaluateHandle("() => nts.uk.resource.getMessage('$messageId')")
         return handle.toString()
     }
 
@@ -150,7 +151,7 @@ open class BasePage {
             "ele => ele.setAttribute('style', 'border: 2px solid red; border-style: dashed;')"
         )
         page.waitForTimeout(500.0)
-        page.evalOnSelector(selector, String.format("ele => ele.setAttribute('style', '%s')", originalStyle))
+        page.evalOnSelector(selector,"ele => ele.setAttribute('style', '$originalStyle')")
     }
 
     /**
@@ -167,7 +168,7 @@ open class BasePage {
         page.waitForTimeout(500.0)
         page.evalOnSelector(
             getDynamicSelector(selector, *dynamicValues),
-            String.format("ele => ele.setAttribute('style', '%s')", originalStyle)
+            "ele => ele.setAttribute('style', '$originalStyle')"
         )
     }
 
@@ -267,5 +268,38 @@ open class BasePage {
 
     protected fun waitForElementDetached(selector: String) {
         page.waitForSelector(selector, Page.WaitForSelectorOptions().setState(WaitForSelectorState.DETACHED))
+    }
+    @Step("メッセージが表示される")
+    internal fun getAndCloseMsgInfo(): String {
+        val msgId = getElementInnerText(page.locator(CommonUI.MSG_ID))
+        takeScreenshot("メッセージ（$msgId）が表示される")
+        closeMsgInfo(msgId)
+        return msgId
+    }
+    @Step("閉じる {0}")
+    internal fun closeMsgInfo(msgId: String) {
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        clickToElement(CommonUI.CLOSE_BTN)
+    }
+    @Step("ボタン「 はい」をクリック")
+    internal fun messageConfirmYes(msgId: String) {
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        clickToElement(CommonUI.YES_BTN)
+        waitForJQueryAndJSLoadedSuccess()
+    }
+    @Step("ボタン「いいえ」をクリックする")
+    internal fun messageConfirmNo(msgId: String) {
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        clickToElement(CommonUI.NO_BTN)
+        waitForJQueryAndJSLoadedSuccess()
+    }
+
+    internal fun clickToButton(textRsId: String) {
+        clickToButtonName(getTextResource(textRsId))
+    }
+    @Step("ボタン「{1}」をクリックする")
+    internal fun clickToButtonName(text: String) {
+        clickToElement(CommonUI.BUTTON, text)
+        takeScreenshot(String.format("ボタン「$text」をクリックする"));
     }
 }
