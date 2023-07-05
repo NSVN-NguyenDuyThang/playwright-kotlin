@@ -1,0 +1,25 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<Period start="2023/01/01"/>
+	<ListWorkplace>
+		<items>
+		<!-- map with Workplace(String baseOnWorkplaceCode,
+								PlaceOfCreation placeOfCreation,
+								String code (コード),
+								String name (名称),
+								String displaceName (表示名),
+								String genericName (総称)
+								) 
+		
+		-->
+			<workplace code="0000000001" name="管理部" displayName="管理部" genericName="管理部"></workplace>
+			<workplace baseOnWorkplaceCode="0000000001" placeOfCreation="CMM011_212" code="0000000002" name="開発部" displayName="開発部" genericName="開発部"></workplace>
+			<workplace baseOnWorkplaceCode="0000000002" placeOfCreation="CMM011_213" code="0000000021" name="第一開発" displayName="第一開発" genericName="第一開発"></workplace>
+			<workplace baseOnWorkplaceCode="0000000021" placeOfCreation="CMM011_212" code="0000000022" name="第二開発" displayName="第二開発" genericName="第二開発"></workplace>
+			<workplace baseOnWorkplaceCode="0000000022" placeOfCreation="CMM011_212" code="0000000023" name="第三開発" displayName="第三開発" genericName="第三開発"></workplace>
+			<workplace baseOnWorkplaceCode="0000000023" placeOfCreation="CMM011_213" code="0000000231" name="クラウド部" displayName="クラウド部" genericName="クラウド部"></workplace>
+			<workplace baseOnWorkplaceCode="0000000002" placeOfCreation="CMM011_212" code="0000000003" name="個人部" displayName="個人部" genericName="個人部"></workplace>
+		</items>
+	</ListWorkplace>
+	
+</DATA>
