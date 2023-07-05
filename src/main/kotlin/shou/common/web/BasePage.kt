@@ -10,6 +10,7 @@ import com.microsoft.playwright.options.WaitUntilState
 import io.qameta.allure.Allure
 import io.qameta.allure.Step
 import java.io.ByteArrayInputStream
+import java.util.concurrent.Callable
 
 /**
  *
@@ -155,64 +156,56 @@ open class BasePage {
         page.evalOnSelector(selector,"ele => ele.setAttribute('style', '$originalStyle')")
     }
 
-    /**
-     * Highlight element before interact
-     * @param selector
-     * @param dynamicValues
-     */
-    protected fun highlightElement(selector: String, vararg dynamicValues: String?) {
-        val originalStyle = page.getAttribute(getDynamicSelector(selector, *dynamicValues), "style") ?: ""
-        page.evalOnSelector(
-            getDynamicSelector(selector, *dynamicValues),
-            "ele => ele.setAttribute('style', 'border: 2px solid red; border-style: dashed;')"
-        )
-        page.waitForTimeout(500.0)
-        page.evalOnSelector(
-            getDynamicSelector(selector, *dynamicValues),
-            "ele => ele.setAttribute('style', '$originalStyle')"
-        )
-    }
-
     internal fun takeScreenshot(title: String?) {
         Allure.addAttachment(title, ByteArrayInputStream(page.screenshot()))
     }
 
-    protected fun fillToElement(selector: String?, value: String?) {
+    @Step("{0}")
+    protected fun addStep(step: String, runnable: Runnable) {
+        runnable.run()
+    }
+
+    internal fun fillToElement(selector: String?, value: String?) {
         highlightElement(selector)
         page.fill(selector, value)
     }
     @Step("テキスト [{1}] を {2}に入力")
-    protected fun fillToElement(selector: String?, value: String?, elementName: String?) {
+    internal fun fillToElement(selector: String?, value: String?, elementName: String?) {
         fillToElement(selector, value)
     }
 
-    protected fun fillToElement(locator: Locator?, value: String?) {
+    internal fun fillToElement(locator: Locator?, value: String?) {
         highlightElement(locator)
         locator?.fill(value)
     }
 
     @Step("テキスト [{1}] を {2}に入力")
-    protected fun fillToElement(locator: Locator?, value: String?, elementName: String?) {
+    internal fun fillToElement(locator: Locator?, value: String?, elementName: String?) {
         fillToElement(locator, value)
     }
 
-    protected fun pressKeyToElement(locator: Locator?, key: String) {
+    internal fun pressKeyToElement(locator: Locator?, key: String) {
         locator?.press(key)
     }
 
-    protected fun clickToElement(selector: String?) {
+    @Step("{0")
+    internal fun clickToElement(step: String, selector: String?) {
+        clickToElement(selector)
+    }
+
+    internal fun clickToElement(selector: String?) {
         highlightElement(selector)
         page.click(selector, Page.ClickOptions())
     }
 
-    protected fun clickToElement(selector: String, vararg dynamicValues: String?) {
-        highlightElement(selector, *dynamicValues)
-        page.click(getDynamicSelector(selector, *dynamicValues))
-    }
-
-    protected fun clickToElement(locator: Locator?) {
+    internal fun clickToElement(locator: Locator?) {
         highlightElement(locator)
         locator?.click()
+    }
+
+    @Step("{0}")
+    internal fun clickToElement(step: String, locator: Locator?) {
+       clickToElement(locator)
     }
 
     protected fun clickToButtonUsingJs(locator: Locator) {
@@ -228,11 +221,6 @@ open class BasePage {
     protected fun doubleClickToElement(locator: Locator) {
         highlightElement(locator)
         locator.dblclick()
-    }
-
-    protected fun doubleClickToElement(selector: String, vararg dynamicValues: String?) {
-        highlightElement(selector, *dynamicValues)
-        page.dblclick(getDynamicSelector(selector, *dynamicValues))
     }
 
     protected fun getElementInnerText(locator: Locator): String {
@@ -317,7 +305,7 @@ open class BasePage {
     }
     @Step("ボタン「{0}」をクリックする")
     private fun clickToButtonName(text: String) {
-        clickToElement(CommonUI.BUTTON, text)
+        clickToElement(String.format(CommonUI.BUTTON, text))
         takeScreenshot(String.format("ボタン「$text」をクリックする"));
     }
 
@@ -330,5 +318,14 @@ open class BasePage {
         clickToElement(frame.locator(String.format(CommonUI.BUTTON, text)))
         takeScreenshot(String.format("ボタン「$text」をクリックする"));
     }
+
+    companion object {
+        internal const val CHECK_TO_CHECKBOX = ""
+        internal const val CHECK_TO_SWITCH_BOX = ""
+        internal const val CHECK_TO_RADIO_BUTTON = ""
+        internal const val SELECT_FROM_COMBOBOX = ""
+        internal const val SELECT_DATE_TIME_VALUE = ""
+    }
+
 
 }
