@@ -163,6 +163,7 @@ open class BasePage {
     @Step("{0}")
     protected fun addStep(step: String, runnable: Runnable) {
         runnable.run()
+        takeScreenshot(step)
     }
 
     internal fun fillToElement(selector: String?, value: String?) {
@@ -322,7 +323,7 @@ open class BasePage {
     companion object {
         internal const val CHECK_TO_CHECKBOX = ""
         internal const val CHECK_TO_SWITCH_BOX = ""
-        internal const val CHECK_TO_RADIO_BUTTON = ""
+        internal const val CHECK_TO_RADIO_BUTTON = "Select option 「%s」"
         internal const val SELECT_FROM_COMBOBOX = ""
         internal const val SELECT_DATE_TIME_VALUE = ""
     }
