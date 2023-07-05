@@ -5,14 +5,25 @@ import org.testng.annotations.Test
 import shou.BaseTest
 import shou.page.web.cmm011.Cmm011aPage
 import shou.page.web.cmm011.ListWorkplace
+import shou.page.web.cmm029.Cmm029aPage
+import shou.page.web.cmm029.WorkSettingList
 import shou.path.PathList
 import shou.utils.model.Period
 
 
 class MasterSetup() : BaseTest() {
     private lateinit var cmm011a: Cmm011aPage
+    private lateinit var cmm029a: Cmm029aPage
+
+    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
+        cmm029a = createInstance(Cmm029aPage::class.java)
+        cmm029a.openPageUrl(domain + PathList.CMM029A.value)
+        Assert.assertEquals(cmm029a.registerWorkSetting(workSettingList), "Msg_15")
+    }
+
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORKPLACE_DATA", dataProviderClass = MasterDataProvider::class)
-    fun step001_cmm011_addWorkplace(period: Period, workplaceList: ListWorkplace) {
+    fun step007_cmm011_addWorkplace(period: Period, workplaceList: ListWorkplace) {
         cmm011a = createInstance(Cmm011aPage::class.java)
         cmm011a.openPageUrl(Companion.domain + PathList.CMM011A.value)
         val screenStatus = cmm011a.handleStartScreen()

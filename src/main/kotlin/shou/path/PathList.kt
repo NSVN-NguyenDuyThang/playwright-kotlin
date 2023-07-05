@@ -5,6 +5,7 @@ enum class PathList(val value: String) {
 
     // web
     CCG007("nts.uk.com.web/view/ccg/007/d/index.xhtml"),
-    CMM011A("nts.uk.com.web/view/cmm/011/a/index.xhtml")
+    CMM011A("nts.uk.com.web/view/cmm/011/a/index.xhtml"),
+    CMM029A("nts.uk.com.web/view/cmm/029/a/index.xhtml")
 
 }
