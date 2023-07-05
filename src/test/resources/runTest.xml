@@ -3,10 +3,10 @@
 <suite  name="UK" parallel = "tests" thread-count="4" >
 	<parameter name ="contractCD" value ="000000000004" />
 	<parameter name ="contractPW" value ="0" />
-	<parameter name ="companyCode" value ="0004" />
-	<parameter name ="employeeCode" value ="00000005" />
+	<parameter name ="companyCode" value ="0006" />
+	<parameter name ="employeeCode" value ="460001" />
 	<parameter name ="employeePW" value ="0" />
-	<parameter name ="domain" value = "http://192.168.100.249:400/" />
+	<parameter name ="domain" value = "http://192.168.100.168:999/" />
 	<parameter name ="webMode" value="true"/>
 
 	<listeners>
@@ -17,7 +17,7 @@
 	<test name="Run on Chrome Batch 1">
 		<parameter name ="browser" value ="chromium" />
 		<classes>
-			<class name="uk.web.ccg007.Ccg007"></class>
+			<class name="uk.business.master.MasterSetup"></class>
 		</classes>
 	</test>
 </suite>
