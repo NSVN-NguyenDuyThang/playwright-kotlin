@@ -16,7 +16,7 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
      */
     internal fun selectByCode(code: String): String {
         val id: String = clickToCombobox()
-        clickToElement(BY_CODE, id, code)
+        clickToElement(String.format(BY_CODE, id, code))
         return page.innerText(String.format(TITLE, id, code))
     }
 
@@ -27,7 +27,7 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
      */
     internal fun selectByCodeTitle(code: String) {
         val id: String = clickToCombobox()
-        clickToElement(BY_CODE, id, code)
+        clickToElement(String.format(BY_CODE, id, code))
     }
 
     /**
@@ -38,7 +38,7 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
      */
     internal fun selectByTitle(title: String): String {
         val id: String = clickToCombobox()
-        clickToElement(BY_TITLE, id, title)
+        clickToElement(String.format(BY_TITLE, id, title))
         return title
     }
 
@@ -50,7 +50,7 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
      */
     internal fun selectByStartTitle(pattern: String): String {
         val id: String = clickToCombobox()
-        clickToElement(BY_START_TITLE, id, pattern)
+        clickToElement(String.format(BY_START_TITLE, id, pattern))
         return pattern
     }
     /**
