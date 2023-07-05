@@ -205,7 +205,7 @@ open class BaseTest {
         protected lateinit var companyCode: String
         protected lateinit var employeeCode: String
         protected lateinit var employeePW: String
-        protected lateinit var domain: String
+        internal lateinit var domain: String
         protected var cloudEnv: Boolean = true
         protected var webMode: Boolean = true
         private var isFirstLoginOfSession = false

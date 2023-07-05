@@ -11,12 +11,10 @@ class Ccg007Page() : BasePage() {
 
     internal fun contractLogin(contractCD: String, contractPW: String) {
         val title : String = getTextResource("CCG007_51")
-        val contractDlg : FrameLocator = getFrame(title) ?: throw PlaywrightException("No such frame with $title title")
+        val contractDlg : FrameLocator = getFrame(title)
         fillToElement(contractDlg.locator(CONTRACT_CD), contractCD)
         fillToElement(contractDlg.locator(CONTRACT_PW), contractPW)
         clickToElement(contractDlg.locator(LOGIN_BTN))
-        DatePicker(page, "").input("")
-        DatePicker(page, "", page.frameLocator("")).input("")
     }
 
     internal fun companyLogin(companyCD: String, employeeCD: String, employeePW: String) {

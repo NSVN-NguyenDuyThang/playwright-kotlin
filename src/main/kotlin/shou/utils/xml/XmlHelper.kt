@@ -19,7 +19,8 @@ import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
 
 
-class XmlHelper(private val xmlMapper: XmlMapper = XmlMapper()) {
+object XmlHelper {
+    private val xmlMapper: XmlMapper = XmlMapper()
     @Throws(SAXException::class, IOException::class, ParserConfigurationException::class, TransformerException::class)
     fun <T> readFile(required: Required, vararg pathToFile: String): T {
         var filePath: String = GlobalConstants.dataTestPath
@@ -88,7 +89,7 @@ class XmlHelper(private val xmlMapper: XmlMapper = XmlMapper()) {
 
     interface Required {
         @Throws(TransformerException::class, IOException::class)
-        fun <T> readFile(document: Document?): T
+        fun <T> readFile(document: Document): T
     }
 
 }

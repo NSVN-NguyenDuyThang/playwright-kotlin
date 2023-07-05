@@ -4,6 +4,7 @@ import com.microsoft.playwright.FrameLocator
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
 import com.microsoft.playwright.Page.GoBackOptions
+import com.microsoft.playwright.PlaywrightException
 import com.microsoft.playwright.options.WaitForSelectorState
 import com.microsoft.playwright.options.WaitUntilState
 import io.qameta.allure.Allure
@@ -88,8 +89,8 @@ open class BasePage {
      * @param frameTitle
      * @return
      */
-    internal fun getFrame(frameTitle: String?): FrameLocator? {
-        return page.frameLocator(getDynamicSelector(CommonUI.IFRAME, frameTitle))
+    internal fun getFrame(frameTitle: String): FrameLocator {
+        return page.frameLocator(getDynamicSelector(CommonUI.IFRAME, frameTitle)).first() ?: throw PlaywrightException("No such frame with $frameTitle title")
     }
 
     /**
@@ -97,7 +98,7 @@ open class BasePage {
      * @param textRsId
      * @return
      */
-    internal fun getTextResource(textRsId: String): String {
+    internal fun getTextResource(textRsId: String?): String {
         val handle = page.evaluateHandle("() => nts.uk.resource.getText('$textRsId')")
         return handle.toString()
     }
@@ -180,10 +181,23 @@ open class BasePage {
         highlightElement(selector)
         page.fill(selector, value)
     }
+    @Step("テキスト [{1}] を {2}に入力")
+    protected fun fillToElement(selector: String?, value: String?, elementName: String?) {
+        fillToElement(selector, value)
+    }
 
     protected fun fillToElement(locator: Locator?, value: String?) {
         highlightElement(locator)
         locator?.fill(value)
+    }
+
+    @Step("テキスト [{1}] を {2}に入力")
+    protected fun fillToElement(locator: Locator?, value: String?, elementName: String?) {
+        fillToElement(locator, value)
+    }
+
+    protected fun pressKeyToElement(locator: Locator?, key: String) {
+        locator?.press(key)
     }
 
     protected fun clickToElement(selector: String?) {
@@ -256,6 +270,10 @@ open class BasePage {
 
     protected fun waitForElementVisible(selector: String) {
         page.waitForSelector(selector, Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE))
+    }
+
+    protected fun waitForElementVisible(selector: String, timeoutMs: Double) {
+        page.waitForSelector(selector, Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(timeoutMs))
     }
 
     protected fun waitForElementHidden(selector: String) {
