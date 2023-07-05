@@ -10,4 +10,7 @@ object CommonUI {
     const val YES_BTN: String = "//button[@class='yes large danger']"
     const val NO_BTN: String = "//button[@class='no large']"
     const val BUTTON: String = "//button[normalize-space()='%s']"
+    const val INPUT_BY_ID: String = "//input[@id='%s']"
+    const val INPUT_BY_VALUE_NAME: String = "//input[contains(@data-bind, 'value: %s')]"
+    const val TEXTAREA_BY_ID: String = "//textarea[@id='%s']"
 }
