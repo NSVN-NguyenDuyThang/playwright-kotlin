@@ -3,11 +3,10 @@ package shou.page.web.cmm011
 import org.w3c.dom.Document
 import shou.utils.model.Period
 import shou.utils.xml.XmlHelper
-import shou.utils.xml.XmlHelper.Required
 import java.io.IOException
 import javax.xml.transform.TransformerException
 
-class Cmm011Xml : Required {
+class Cmm011Master : XmlHelper.Required {
     @Throws(TransformerException::class, IOException::class)
     override fun <T> readFile(document: Document): T {
         val result = mutableMapOf<String, Any>()
