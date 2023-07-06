@@ -1,6 +1,7 @@
 package uk.business.master
 
 import org.testng.annotations.DataProvider
+import shou.page.web.cmm008.Cmm008Master
 import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
 import shou.page.web.cmm014.Cmm014Master
@@ -38,6 +39,13 @@ class MasterDataProvider {
     fun cmm013_getPositionData(): Array<Any?>? {
         val data: Map<String, Any> = readFile(Cmm013Master(), "master", "cmm013_register_position.xml")
         return arrayOf(data["listPosition"])
+    }
+
+    @DataProvider(name = "EMPLOYMENT_DATA")
+    fun getEmploymentData(): Array<Any?>? {
+        val data: Map<String, Any> =
+            readFile(Cmm008Master(), "master", "cmm008_register_employment.xml")
+        return arrayOf(data["employmentList"])
     }
 
 }
