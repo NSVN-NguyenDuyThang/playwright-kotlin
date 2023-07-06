@@ -45,14 +45,11 @@ class TreeGrid(override var page: Page, private val wrapper: String) : BasePage(
      * <i>Chỉ áp dụng cho multiple-tree-grid</i>
      * @return list node text của tất cả các node
      */
-    fun selectAllNode(): List<String?> {
+    fun selectAllNode(): List<String?>? {
         val nodeTextLst = mutableListOf<String?>()
         checkAll()
         val nodes: Locator? = wrapperLocator?.locator(NODE)
-        for (idx in 0 until nodes?.count()!!) {
-            nodeTextLst.add(getNodeText(nodes.nth(idx)))
-        }
-        return nodeTextLst
+        return nodes?.all()?.map { getNodeText(it) }?.toList()
     }
 
     private fun checkAll() {
