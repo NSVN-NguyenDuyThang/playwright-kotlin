@@ -19,7 +19,7 @@ class Cmm014Page() : BasePage() {
         val clfRows : Locator = page.locator(CLASSIFICATION_ITEM_LIST)
         clfRows.all().map { it.getAttribute("data-id") }
             .filter { clfList.contains(it) }
-            .forEach { deleteClassification(it); page.waitForLoadState() }
+            .forEach { deleteClassification(it); page.waitForTimeout(1000.0) }
     }
 
     @Step("分類の削除 「{0}」")
