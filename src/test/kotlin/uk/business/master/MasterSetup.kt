@@ -13,9 +13,11 @@ import shou.page.web.cmm014.Cmm014Page
 import shou.page.web.cmm014.ListClassification
 import shou.page.web.cmm029.Cmm029aPage
 import shou.page.web.cmm029.WorkSettingList
+import shou.page.web.kmk003.Kmk003Page
+import shou.page.web.kmk003.ListWorkTime
+import shou.page.web.kmk003.WorkTime
 import shou.page.web.kmk007.Kmk007Page
 import shou.page.web.kmk007.ListWorktype
-import shou.page.web.kmk007.WorkType
 import shou.path.PathList
 import shou.utils.model.Period
 import java.util.stream.Collectors
@@ -28,6 +30,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cmm013a: Cmm013aPage
     private lateinit var cmm008a: Cmm008aPage
     private lateinit var kmk007: Kmk007Page
+    private lateinit var kmk003: Kmk003Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -43,6 +46,16 @@ class MasterSetup() : BaseTest() {
         kmk007.deleteWorktypeIfExisted( workTypeList.items.map { it.code } )
         for (workType in workTypeList.items) {
             Assert.assertEquals(kmk007.registerWorktype(workType), "Msg_15")
+        }
+    }
+
+    @Test(description = "test_003_KMK003_就業時間帯の登録", dataProvider = "KMK003_MASTER_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step003_kmk003(workTimeList: ListWorkTime) {
+        kmk003 = createInstance(Kmk003Page::class.java)
+        kmk003.openPageUrl(domain + PathList.KMK003.value)
+        kmk003.deleteWorkTimeIfExisted(workTimeList.items.map { it.code!! })
+        for (workTime in workTimeList.items) {
+            Assert.assertEquals(kmk003.registerWorktime(workTime), "Msg_15")
         }
     }
 

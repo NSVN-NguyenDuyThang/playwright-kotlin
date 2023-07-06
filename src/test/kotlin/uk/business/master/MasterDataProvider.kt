@@ -6,6 +6,7 @@ import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
 import shou.page.web.cmm014.Cmm014Master
 import shou.page.web.cmm029.Cmm029Master
+import shou.page.web.kmk003.Kml003Master
 import shou.page.web.kmk007.Kmk007Master
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
@@ -53,6 +54,12 @@ class MasterDataProvider {
     fun kmk007_getWorktypeData(): Array<Any?>? {
         val data: Map<String, Any> = readFile(Kmk007Master(), "master", "kmk007_register_worktype.xml")
         return arrayOf(data["workTypeList"])
-    };
+    }
+
+    @DataProvider(name = "KMK003_MASTER_DATA")
+    fun getWorktimeData(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(Kml003Master(), "master", "kmk003_master.xml")
+        return arrayOf(data["listWorktime"])
+    }
 
 }
