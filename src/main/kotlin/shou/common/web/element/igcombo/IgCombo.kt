@@ -75,7 +75,7 @@ class IgCombo(override var page: Page, private val comboBoxWrapper: String) : Ba
         private const val ITEMS: String = "//div[@dropdown-for='%s']//li[@data-value]"
         private const val TITLE: String = "//div[@dropdown-for='%s']//li[@data-value='%s']//div[@class='nts-combo-item']/div[2]"
         private const val BY_CODE: String = "//div[@dropdown-for='%s']//li[@data-value='%s']"
-        private const val BY_TITLE: String = "//div[@dropdown-for='%s']//li[@data-value]//div[@class='nts-combo-item']/div[1][normalize-space()='%s']"
+        private const val BY_TITLE: String = "//div[@dropdown-for='%s']//li[@data-value]//div[@class='nts-combo-item']/div[1][text()='%s\u00a0']"
         private const val BY_START_TITLE: String = "//div[@dropdown-for='%s']//li[@data-value]//div[@class='nts-combo-item']/div[1][starts-with(text(),'%s')]"
     }
 

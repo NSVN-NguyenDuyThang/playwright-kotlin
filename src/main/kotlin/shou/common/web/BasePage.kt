@@ -296,18 +296,19 @@ open class BasePage {
     }
     @Step("閉じる {0}")
     internal fun closeMsgInfo(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.CLOSE_BTN)
     }
+
     @Step("ボタン「 はい」をクリック")
     internal fun messageConfirmYes(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.YES_BTN)
         waitForJQueryAndJSLoadedSuccess()
     }
     @Step("ボタン「いいえ」をクリックする")
     internal fun messageConfirmNo(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.NO_BTN)
         waitForJQueryAndJSLoadedSuccess()
     }
