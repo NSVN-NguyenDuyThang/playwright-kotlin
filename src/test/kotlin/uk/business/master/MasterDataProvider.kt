@@ -2,6 +2,7 @@ package uk.business.master
 
 import org.testng.annotations.DataProvider
 import shou.page.web.cmm011.Cmm011Master
+import shou.page.web.cmm013.Cmm013Master
 import shou.page.web.cmm014.Cmm014Master
 import shou.page.web.cmm029.Cmm029Master
 import shou.utils.xml.XmlHelper
@@ -26,13 +27,17 @@ class MasterDataProvider {
         )
     }
 
-
     @DataProvider(name = "CLASSIFICATION_DATA")
-    fun getClassificationData(): Array<Any?>? {
+    fun cmm014_getClassificationData(): Array<Any?>? {
         val data: Map<String, Any> =
             readFile(Cmm014Master(), "master", "cmm014_register_classification.xml")
         return arrayOf(data["classificationList"])
     }
 
+    @DataProvider(name = "POSITION_DATA")
+    fun cmm013_getPositionData(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(Cmm013Master(), "master", "cmm013_register_position.xml")
+        return arrayOf(data["listPosition"])
+    }
 
 }

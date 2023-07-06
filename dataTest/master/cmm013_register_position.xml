@@ -1,0 +1,15 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListPosition>
+		<items>
+			<position code="90001" name="取締役"/>
+			<position code="90002" name="執行役員"/>
+			<position code="90003" name="部長"/>
+			<position code="90004" name="課長"/>
+			<position code="90005" name="係長"/>
+			<position code="90006" name="主任"/>
+			<position code="90007" name="一般社員"/>
+			<position code="90008" name="アルバイト"/>
+		</items>
+	</ListPosition>
+</DATA>

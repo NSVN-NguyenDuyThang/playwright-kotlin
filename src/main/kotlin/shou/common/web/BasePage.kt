@@ -94,6 +94,11 @@ open class BasePage {
         return page.frameLocator(getDynamicSelector(CommonUI.IFRAME, frameTitle)).first() ?: throw PlaywrightException("No such frame with $frameTitle title")
     }
 
+    internal fun getVisibleFrame(): FrameLocator {
+        return page.frameLocator(CommonUI.VISIBLE_IFRAME).first()
+    }
+
+
     /**
      * get text resource
      * @param textRsId

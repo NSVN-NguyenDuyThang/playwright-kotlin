@@ -3,6 +3,7 @@ package shou.common.web
 object CommonUI {
     //web
     const val IFRAME: String = "//span[text()='%s']/parent::div/following-sibling::div/iframe"
+    const val VISIBLE_IFRAME: String = "//div[@role='dialog' and not(contains(@style, 'display: none;'))]//iframe"
     const val MSG_ID: String = "//div[@class='control pre']"
     const val DISPLAY_MSG_ID: String = "//div[@class='control pre' and text()='%s']"
     const val MSG_CONTENT: String = "//div[@class='text']"
