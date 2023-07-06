@@ -85,13 +85,8 @@ class Cmm011aPage() : BasePage() {
     @Step(" 「{1}」より大きい履歴を削除")
     private fun removeHistoryAfterTargetHistory(targetHistory: String) {
         val historyRows: Locator = addHistoryDlg!!.locator(PERIOD_DATE_ROWS)
-        var historyValues = mutableListOf<String>()
-        page.waitForTimeout(1000.0)
-        for (idx in 0 until historyRows.count()) {
-            historyValues.add(historyRows.nth(idx).innerText())
-        }
-        historyValues = historyValues.filter { equalOrAfterTargetHistory(targetHistory, it.substring(0..9)) }.toMutableList()
-        for (idx in 0 until historyValues.size) {
+        val historyValues = historyRows.all().map { it.innerText() }.filter { equalOrAfterTargetHistory(targetHistory, it.substring(0..9)) }
+        for (idx in historyValues.indices) {
             if ((addHistoryDlg!!.locator(PERIOD_DATE_ROWS).count() == 1) && (idx == historyValues.size - 1)) {
                 editHistory(DataFaker.addDay("yyyy/MM/dd", targetHistory, -1))
                 clickToButton("CMM011_107")
