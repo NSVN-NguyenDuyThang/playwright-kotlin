@@ -9,7 +9,8 @@ enum class PathList(val value: String) {
     CMM029A("nts.uk.com.web/view/cmm/029/a/index.xhtml"),
     CMM014("nts.uk.com.web/view/cmm/014/a/index.xhtml"),
     CMM013A("nts.uk.com.web/view/cmm/013/a/index.xhtml"),
-    CMM008A("nts.uk.com.web/view/cmm/008/a/index.xhtml")
+    CMM008A("nts.uk.com.web/view/cmm/008/a/index.xhtml"),
+    KMK007("nts.uk.at.web/view/kmk/007/a/index.xhtml")
 
 
 

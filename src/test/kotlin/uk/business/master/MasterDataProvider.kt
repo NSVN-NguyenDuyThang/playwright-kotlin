@@ -6,6 +6,7 @@ import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
 import shou.page.web.cmm014.Cmm014Master
 import shou.page.web.cmm029.Cmm029Master
+import shou.page.web.kmk007.Kmk007Master
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
 import java.io.IOException
@@ -42,10 +43,16 @@ class MasterDataProvider {
     }
 
     @DataProvider(name = "EMPLOYMENT_DATA")
-    fun getEmploymentData(): Array<Any?>? {
+    fun cmm008_getEmploymentData(): Array<Any?>? {
         val data: Map<String, Any> =
             readFile(Cmm008Master(), "master", "cmm008_register_employment.xml")
         return arrayOf(data["employmentList"])
     }
+
+    @DataProvider(name = "WORKTYPE_DATA")
+    fun kmk007_getWorktypeData(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(Kmk007Master(), "master", "kmk007_register_worktype.xml")
+        return arrayOf(data["workTypeList"])
+    };
 
 }

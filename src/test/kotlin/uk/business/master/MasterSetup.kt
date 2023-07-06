@@ -13,8 +13,13 @@ import shou.page.web.cmm014.Cmm014Page
 import shou.page.web.cmm014.ListClassification
 import shou.page.web.cmm029.Cmm029aPage
 import shou.page.web.cmm029.WorkSettingList
+import shou.page.web.kmk007.Kmk007Page
+import shou.page.web.kmk007.ListWorktype
+import shou.page.web.kmk007.WorkType
 import shou.path.PathList
 import shou.utils.model.Period
+import java.util.stream.Collectors
+
 
 class MasterSetup() : BaseTest() {
     private lateinit var cmm011a: Cmm011aPage
@@ -22,12 +27,23 @@ class MasterSetup() : BaseTest() {
     private lateinit var cmm014: Cmm014Page
     private lateinit var cmm013a: Cmm013aPage
     private lateinit var cmm008a: Cmm008aPage
+    private lateinit var kmk007: Kmk007Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
         cmm029a = createInstance(Cmm029aPage::class.java)
         cmm029a.openPageUrl(domain + PathList.CMM029A.value)
         Assert.assertEquals(cmm029a.registerWorkSetting(workSettingList), "Msg_15")
+    }
+
+    @Test(description = "test_002_KMK007_勤務種類の登録", dataProvider = "WORKTYPE_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step002_kmk007_registerWorktype(workTypeList: ListWorktype) {
+        kmk007 = createInstance(Kmk007Page::class.java)
+        kmk007.openPageUrl(domain + PathList.KMK007.value)
+        kmk007.deleteWorktypeIfExisted( workTypeList.items.map { it.code } )
+        for (workType in workTypeList.items) {
+            Assert.assertEquals(kmk007.registerWorktype(workType), "Msg_15")
+        }
     }
 
     @Test(dataProvider = "CLASSIFICATION_DATA", dataProviderClass = MasterDataProvider::class, description = "test_004_CMM014-分類情報の登録"
