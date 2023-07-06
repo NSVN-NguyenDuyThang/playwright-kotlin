@@ -196,7 +196,17 @@ open class BasePage {
         fillToElement(locator, value)
     }
 
-    protected fun pressKeyToElement(locator: Locator?, key: String) {
+    internal fun typeToElement(selector: String?, value: String?) {
+        highlightElement(selector)
+        page.locator(selector).first().clear()
+        page.type(selector, value)
+    }
+    @Step("テキスト [{1}] を {2}に入力")
+    internal fun typeToElement(selector: String?, value: String?, elementName: String?) {
+        typeToElement(selector, value)
+    }
+
+    internal fun pressKeyToElement(locator: Locator?, key: String) {
         locator?.press(key)
     }
 
