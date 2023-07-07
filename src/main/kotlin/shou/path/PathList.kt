@@ -13,7 +13,6 @@ enum class PathList(val value: String) {
     KMK007("nts.uk.at.web/view/kmk/007/a/index.xhtml"),
     KMK003("nts.uk.at.web/view/kmk/003/a/index.xhtml"),
     KMK012("nts.uk.at.web/view/kmk/012/a/index.xhtml"),
-
-
+    KMF001("nts.uk.at.web/view/kmf/001/a/index.xhtml"),
 
 }

@@ -13,6 +13,9 @@ import shou.page.web.cmm014.Cmm014Page
 import shou.page.web.cmm014.ListClassification
 import shou.page.web.cmm029.Cmm029aPage
 import shou.page.web.cmm029.WorkSettingList
+import shou.page.web.kmf001.Kmf001Page
+import shou.page.web.kmf003.AnnualVacation
+import shou.page.web.kmf003.Kmf003Page
 import shou.page.web.kmk003.Kmk003Page
 import shou.page.web.kmk003.ListWorkTime
 import shou.page.web.kmk007.Kmk007Page
@@ -22,6 +25,7 @@ import shou.page.web.kmk012.ListClosure
 import shou.page.web.kmk012.ListClosureForEmployment
 import shou.path.PathList
 import shou.utils.model.Period
+import java.util.*
 
 
 class MasterSetup() : BaseTest() {
@@ -33,6 +37,8 @@ class MasterSetup() : BaseTest() {
     private lateinit var kmk007: Kmk007Page
     private lateinit var kmk003: Kmk003Page
     private lateinit var kmk012: Kmk012Page
+    private lateinit var kmf001: Kmf001Page
+    private lateinit var kmf003: Kmf003Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -122,5 +128,18 @@ class MasterSetup() : BaseTest() {
         kmk012.clickToRegisterAssignButton()
         Assert.assertEquals(kmk012.verifyRegisterSuccess(), "Msg_15")
         kmk012.closeDialogAssignClosureForEmployment()
+    }
+
+    @Test(description = "test_009_KMF001_休暇の設定 - 年休付与の登録", dataProvider = "KMF003_ANNUAL_VACATION_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step009_kmf001_kmf003_annualVacationSetting(annualVacation: AnnualVacation) {
+        kmf001 = createInstance(Kmf001Page::class.java)
+        kmf001.openPageUrl(domain + PathList.KMF001.value)
+        kmf001.clickToRegisterAnnualVacation()
+        kmf003 = createInstance(Kmf003Page::class.java)
+        val annualVacationCode = listOf(annualVacation.code)
+        kmf003.deleteAnnualVacationIfExisted(annualVacationCode)
+        Assert.assertEquals(kmf003.registerAnnualVacation(annualVacation), "Msg_15")
+        Assert.assertEquals(kmf003.registerGrantTime(annualVacation.frameList!!, annualVacation.grantTimesList!!), "Msg_15")
+        kmf003.closeDialog()
     }
 }
