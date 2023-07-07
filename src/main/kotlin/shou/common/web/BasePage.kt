@@ -178,6 +178,7 @@ open class BasePage {
     @Step("テキスト [{1}] を {2}に入力")
     internal fun fillToElement(selector: String?, value: String?, elementName: String?) {
         fillToElement(selector, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
     }
 
     internal fun fillToElement(locator: Locator?, value: String?) {
@@ -188,6 +189,7 @@ open class BasePage {
     @Step("テキスト [{1}] を {2}に入力")
     internal fun fillToElement(locator: Locator?, value: String?, elementName: String?) {
         fillToElement(locator, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
     }
 
     internal fun typeToElement(selector: String?, value: String?) {
@@ -198,6 +200,18 @@ open class BasePage {
     @Step("テキスト [{1}] を {2}に入力")
     internal fun typeToElement(selector: String?, value: String?, elementName: String?) {
         typeToElement(selector, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
+    }
+
+    internal fun typeToElement(locator: Locator, value: String?) {
+        highlightElement(locator)
+        locator.first().clear()
+        locator.type(value)
+    }
+    @Step("テキスト [{1}] を {2}に入力")
+    internal fun typeToElement(locator: Locator, value: String?, elementName: String?) {
+        typeToElement(locator, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
     }
 
     internal fun pressKeyToElement(locator: Locator?, key: String) {
