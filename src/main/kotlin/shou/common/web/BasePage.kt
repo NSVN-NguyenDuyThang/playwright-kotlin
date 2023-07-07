@@ -172,6 +172,7 @@ open class BasePage {
     @Step("テキスト [{1}] を {2}に入力")
     internal fun fillToElement(selector: String?, value: String?, elementName: String?) {
         fillToElement(selector, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
     }
 
     internal fun fillToElement(locator: Locator?, value: String?) {
@@ -182,6 +183,29 @@ open class BasePage {
     @Step("テキスト [{1}] を {2}に入力")
     internal fun fillToElement(locator: Locator?, value: String?, elementName: String?) {
         fillToElement(locator, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
+    }
+    
+    internal fun typeToElement(selector: String?, value: String?) {
+        highlightElement(selector)
+        page.locator(selector).first().clear()
+        page.type(selector, value)
+    }
+    @Step("テキスト [{1}] を {2}に入力")
+    internal fun typeToElement(selector: String?, value: String?, elementName: String?) {
+        typeToElement(selector, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
+    }
+
+    internal fun typeToElement(locator: Locator, value: String?) {
+        highlightElement(locator)
+        locator.first().clear()
+        locator.type(value)
+    }
+    @Step("テキスト [{1}] を {2}に入力")
+    internal fun typeToElement(locator: Locator, value: String?, elementName: String?) {
+        typeToElement(locator, value)
+        takeScreenshot("テキスト [$value] を $elementName に入力")
     }
 
     internal fun pressKeyToElement(locator: Locator?, key: String) {
@@ -284,18 +308,19 @@ open class BasePage {
     }
     @Step("閉じる {0}")
     internal fun closeMsgInfo(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.CLOSE_BTN)
     }
+
     @Step("ボタン「 はい」をクリック")
     internal fun messageConfirmYes(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.YES_BTN)
         waitForJQueryAndJSLoadedSuccess()
     }
     @Step("ボタン「いいえ」をクリックする")
     internal fun messageConfirmNo(msgId: String) {
-        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG_ID, msgId))
+        waitForElementVisible(String.format(CommonUI.DISPLAY_MSG, msgId))
         clickToElement(CommonUI.NO_BTN)
         waitForJQueryAndJSLoadedSuccess()
     }
