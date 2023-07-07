@@ -1,0 +1,24 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListClosure>
+		<items>
+			<closure closureNo="1" name="締め1" closingDate="末日"></closure>
+			<closure closureNo="2" useSetting = "KMK012_4" ></closure>
+			<closure closureNo="3" useSetting = "KMK012_4" ></closure>
+			<closure closureNo="4" useSetting = "KMK012_4" ></closure>
+			<closure closureNo="5" useSetting = "KMK012_4" ></closure>
+		</items>
+	</ListClosure>
+	<ListClosureForEmployment>
+		<items>
+			<closureForEmployment employmentCode="01" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="02" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="03" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="04" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="05" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="06" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="07" closureCode="1"></closureForEmployment>
+			<closureForEmployment employmentCode="08" closureCode="1"></closureForEmployment>
+		</items>
+	</ListClosureForEmployment>
+</DATA>

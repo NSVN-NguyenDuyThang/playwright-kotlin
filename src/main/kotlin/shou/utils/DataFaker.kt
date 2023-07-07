@@ -24,4 +24,16 @@ object DataFaker {
         val plusDay = localDate.plusDays(day.toLong())
         return formatter.format(plusDay)
     }
+
+    /* Get date of system date */
+    fun getSystemDate(format: String?): String {
+        val formatter = DateTimeFormatter.ofPattern(format)
+        val date = LocalDate.now()
+        return formatter.format(date)
+    }
+
+    /* Lấy tháng năm của system date */
+    fun getSystemYearMonth(): String {
+        return getSystemDate("yyyy/MM/dd").substring(0, 7)
+    }
 }

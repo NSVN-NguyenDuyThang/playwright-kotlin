@@ -8,12 +8,9 @@ import shou.page.web.cmm014.Cmm014Master
 import shou.page.web.cmm029.Cmm029Master
 import shou.page.web.kmk003.Kml003Master
 import shou.page.web.kmk007.Kmk007Master
+import shou.page.web.kmk012.Kmk012Master
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
-import java.io.IOException
-import javax.xml.parsers.ParserConfigurationException
-import javax.xml.transform.TransformerException
-
 
 class MasterDataProvider {
 
@@ -57,9 +54,19 @@ class MasterDataProvider {
     }
 
     @DataProvider(name = "KMK003_MASTER_DATA")
-    fun getWorktimeData(): Array<Any?>? {
+    fun kmk003_getWorktimeData(): Array<Any?>? {
         val data: Map<String, Any> = readFile(Kml003Master(), "master", "kmk003_master.xml")
         return arrayOf(data["listWorktime"])
     }
 
+    @DataProvider(name = "KMK012_CLOSURE_DATA")
+    fun kmk012_getClosingData(): Array<Array<Any?>>? {
+        val data: Map<String, Any> = readFile(Kmk012Master(), "master", "kmk012_closure_setting.xml")
+        return arrayOf(
+            arrayOf(
+                data["closureList"],
+                data["closureForEmploymentList"]
+            )
+        )
+    }
 }

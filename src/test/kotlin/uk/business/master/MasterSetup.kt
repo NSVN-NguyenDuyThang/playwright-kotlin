@@ -15,12 +15,13 @@ import shou.page.web.cmm029.Cmm029aPage
 import shou.page.web.cmm029.WorkSettingList
 import shou.page.web.kmk003.Kmk003Page
 import shou.page.web.kmk003.ListWorkTime
-import shou.page.web.kmk003.WorkTime
 import shou.page.web.kmk007.Kmk007Page
 import shou.page.web.kmk007.ListWorktype
+import shou.page.web.kmk012.Kmk012Page
+import shou.page.web.kmk012.ListClosure
+import shou.page.web.kmk012.ListClosureForEmployment
 import shou.path.PathList
 import shou.utils.model.Period
-import java.util.stream.Collectors
 
 
 class MasterSetup() : BaseTest() {
@@ -31,6 +32,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cmm008a: Cmm008aPage
     private lateinit var kmk007: Kmk007Page
     private lateinit var kmk003: Kmk003Page
+    private lateinit var kmk012: Kmk012Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -103,5 +105,22 @@ class MasterSetup() : BaseTest() {
         for (i in 1 until workplaceList.items.size) {
             Assert.assertEquals(cmm011a.addWorkplace(workplaceList.items[i]), "Msg_15")
         }
+    }
+
+    @Test(description = "test_008_KMK012_処理年月の設定", dataProvider = "KMK012_CLOSURE_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step008_kmk012_closureSetting(listClosure: ListClosure, listClosureForEmployment: ListClosureForEmployment) {
+        kmk012 = createInstance(Kmk012Page::class.java)
+        kmk012.openPageUrl(domain + PathList.KMK012.value)
+        for (closureData in listClosure.items) {
+            kmk012.registerClosureData(closureData)
+            Assert.assertEquals(kmk012.verifyRegisterSuccess(), "Msg_15")
+        }
+        kmk012.openDialogAssignClosureForEmployment()
+        for ((employmentCode, closureCode) in listClosureForEmployment.items) {
+            kmk012.assignClosureForEmployment(employmentCode, closureCode)
+        }
+        kmk012.clickToRegisterAssignButton()
+        Assert.assertEquals(kmk012.verifyRegisterSuccess(), "Msg_15")
+        kmk012.closeDialogAssignClosureForEmployment()
     }
 }
