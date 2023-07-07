@@ -218,7 +218,7 @@ open class BasePage {
         locator?.press(key)
     }
 
-    @Step("{0")
+    @Step("{0}")
     internal fun clickToElement(step: String, selector: String?) {
         clickToElement(selector)
     }
