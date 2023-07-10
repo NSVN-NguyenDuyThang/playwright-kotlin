@@ -10,7 +10,10 @@ import com.microsoft.playwright.options.WaitUntilState
 import io.qameta.allure.Allure
 import io.qameta.allure.Step
 import java.io.ByteArrayInputStream
-import java.util.concurrent.Callable
+import java.util.stream.Collectors
+
+
+
 
 /**
  *
@@ -331,6 +334,19 @@ open class BasePage {
         waitForJQueryAndJSLoadedSuccess()
     }
 
+    internal fun isErrorDialogDisplayed(): Boolean {
+        return page.locator(CommonUI.ERROR_DIALOG).isVisible
+    }
+    internal fun getMsgIdAndCloseErrorDialog(): List<String> {
+        openErrorDialog()
+        val msgIds = page.locator(CommonUI.MSG_ID_ERROR_DIALOG).all().map { it.innerText() }
+        clickToElement(CommonUI.BUTTON, "閉じる")
+        return msgIds
+    }
+
+    protected fun openErrorDialog() {
+        clickToElement(CommonUI.ERROR_DIALOG)
+    }
     internal fun clickToButton(textRsId: String) {
         clickToButtonName(getTextResource(textRsId))
     }

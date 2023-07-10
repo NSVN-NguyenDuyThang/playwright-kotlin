@@ -4,6 +4,8 @@ object CommonUI {
     //web
     const val IFRAME: String = "//span[text()='%s']/parent::div/following-sibling::div/iframe"
     const val VISIBLE_IFRAME: String = "//div[@role='dialog' and not(contains(@style, 'display: none;'))]//iframe"
+    const val ERROR_DIALOG = "//button[@class='btn-error small danger']"
+    const val MSG_ID_ERROR_DIALOG = "//td[starts-with(text(),'Msg_')]"
     const val MSG_ID: String = "//div[@class='control pre']"
     const val DISPLAY_MSG: String = "//div[(@class='control pre' or @class='text') and text()='%s']"
     const val MSG_CONTENT: String = "//div[@class='text']"
