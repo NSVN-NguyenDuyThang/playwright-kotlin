@@ -84,17 +84,20 @@ class Cmm011aPage() : BasePage() {
      */
     @Step(" 「{1}」より大きい履歴を削除")
     private fun removeHistoryAfterTargetHistory(targetHistory: String) {
-        val historyRows: Locator = addHistoryDlg!!.locator(PERIOD_DATE_ROWS)
-        val historyValues = historyRows.all().map { it.innerText() }.filter { equalOrAfterTargetHistory(targetHistory, it.substring(0..9)) }
-        for (idx in historyValues.indices) {
-            if ((addHistoryDlg!!.locator(PERIOD_DATE_ROWS).count() == 1) && (idx == historyValues.size - 1)) {
-                editHistory(DataFaker.addDay("yyyy/MM/dd", targetHistory, -1))
-                clickToButton("CMM011_107")
-                page.waitForTimeout(1000.0)
-                break
+        val historyRows: Locator? = addHistoryDlg!!.locator(PERIOD_DATE_ROWS)
+        page.waitForTimeout(1000.0)
+        val historyValues = historyRows?.let { row -> row.all().map { it.innerText() }.filter { equalOrAfterTargetHistory(targetHistory, it.substring(0..9)) } }
+        if (historyValues != null) {
+            for (idx in historyValues.indices) {
+                if ((addHistoryDlg!!.locator(PERIOD_DATE_ROWS).count() == 1) && (idx == historyValues.size - 1)) {
+                    editHistory(DataFaker.addDay("yyyy/MM/dd", targetHistory, -1))
+                    clickToButton("CMM011_107")
+                    page.waitForTimeout(1000.0)
+                    break
+                }
+                val row = "${historyValues[idx].substring(0..12)}9999/12/31"
+                removeHistory(row)
             }
-            val row = "${historyValues[idx].substring(0..12)}9999/12/31"
-            removeHistory(row)
         }
     }
     /**
