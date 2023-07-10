@@ -1,0 +1,16 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <Position>
+        <positionItems>
+            <item code="00000" value="01"/>
+            <item code="90001" value="01"/>
+            <item code="90002" value="01"/>
+            <item code="90003" value="02"/>
+            <item code="90004" value="03"/>
+            <item code="90005" value="03"/>
+            <item code="90006" value="04"/>
+            <item code="90007" value="04"/>
+            <item code="90008" value="05"/>
+        </positionItems>
+    </Position>
+</DATA>

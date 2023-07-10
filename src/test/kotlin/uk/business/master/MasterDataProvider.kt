@@ -10,6 +10,7 @@ import shou.page.web.cas009.RoleInformation
 import shou.page.web.cas011.Cas011Master
 import shou.page.web.cas011.DataCas011
 import shou.page.web.cas011.DataRegister
+import shou.page.web.cas014.Cas014Master
 import shou.page.web.cmm008.Cmm008Master
 import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
@@ -23,7 +24,6 @@ import shou.page.web.kmk012.Kmk012Master
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
 import java.io.IOException
-import java.util.function.Function
 import javax.xml.parsers.ParserConfigurationException
 import javax.xml.transform.TransformerException
 
@@ -118,4 +118,11 @@ class MasterDataProvider {
         result.add(dataCas011?.dataRegister!!)
         return result.map { arrayOf(it) }.toTypedArray()
     }
+
+    @DataProvider(name = "CAS014_MASTER")
+    fun cas014(): Array<Array<Any?>> {
+        val data: Map<String, Any> = readFile(Cas014Master(), "master", "cas014_master.xml")
+        return arrayOf(arrayOf(data["position"]))
+    }
+
 }

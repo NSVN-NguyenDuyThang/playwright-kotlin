@@ -7,9 +7,10 @@ import shou.page.web.cas005.Cas005Page
 import shou.page.web.cas005.GeneralRole
 import shou.page.web.cas009.Cas009Page
 import shou.page.web.cas009.RoleInformation
-import shou.page.web.cas011.Cas011Master
 import shou.page.web.cas011.Cas011Page
 import shou.page.web.cas011.DataRegister
+import shou.page.web.cas014.Cas014Page
+import shou.page.web.cas014.Position
 import shou.page.web.cmm008.Cmm008aPage
 import shou.page.web.cmm008.ListEmployment
 import shou.page.web.cmm011.Cmm011aPage
@@ -49,6 +50,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas005: Cas005Page
     private lateinit var cas009: Cas009Page
     private lateinit var cas011: Cas011Page
+    private lateinit var cas014: Cas014Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -207,6 +209,15 @@ class MasterSetup() : BaseTest() {
             cas011.clickButtonSave()
             Assert.assertEquals(cas011.getMessageResult(), "Msg_15")
         }
+    }
+
+    @Test(description = "test_013_cas014_ロールセットの付与", dataProvider = "CAS014_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step013_cas014(position: Position) {
+        cas014 = createInstance(Cas014Page::class.java)
+        cas014.openPageUrl(domain + PathList.CAS014.value)
+        cas014.changeComboBoxInGrid(position.positionItems)
+        cas014.clickButtonSave()
+        Assert.assertEquals(cas014.getMessageResult(), "Msg_15")
     }
 
 }
