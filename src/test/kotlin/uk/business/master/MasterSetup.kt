@@ -31,6 +31,8 @@ import shou.page.web.kmk007.ListWorktype
 import shou.page.web.kmk012.Kmk012Page
 import shou.page.web.kmk012.ListClosure
 import shou.page.web.kmk012.ListClosureForEmployment
+import shou.page.web.ksm005.Ksm005Page
+import shou.page.web.ksm005.MonthlyPattern
 import shou.path.PathList
 import shou.utils.model.Period
 import java.util.*
@@ -51,6 +53,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas009: Cas009Page
     private lateinit var cas011: Cas011Page
     private lateinit var cas014: Cas014Page
+    private lateinit var ksm005: Ksm005Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -218,6 +221,46 @@ class MasterSetup() : BaseTest() {
         cas014.changeComboBoxInGrid(position.positionItems)
         cas014.clickButtonSave()
         Assert.assertEquals(cas014.getMessageResult(), "Msg_15")
+    }
+
+    @Test(description = "test_014_ksm005_月間パターンの登録", dataProvider = "KSM005_MASTER", dataProviderClass = MasterDataProvider::class
+    )
+    fun step014_ksm005(monthlyPattern: MonthlyPattern) {
+        ksm005 = createInstance(Ksm005Page::class.java)
+        ksm005.openPageUrl(domain + PathList.KSM005.value)
+        //check pattern code, if exists then delete
+        ksm005.checkExistsPatternCode(monthlyPattern.patternCode?.value!!)
+        //Step 2.
+        ksm005.clickButtonCreateNew()
+        //Step 3
+        ksm005.inputCodeName(monthlyPattern.patternCode.value, monthlyPattern.patternName?.value!!)
+        //Step 4
+        ksm005.clickButtonRegister()
+        //Step 5 and 6
+        val messInfoRegister: String = ksm005.getMsgDisplayed()
+
+        //Step 7. open dialog batch setting
+        ksm005.clickButtonOpenDialogBatchSetting()
+
+        //Step 8. open dialog kdl003a
+        ksm005.clickButtonOpenDialogKLD003A()
+        //Step 8.1 and 8.2
+        ksm005.selectWorkTypeAndWordTimeAndClickSubmitKDL003(monthlyPattern.workingDay?.value!!, monthlyPattern.workTime?.value!!)
+        //Step 9. open dialog holiday kdl002a
+        ksm005.clickOpenDialogHolidayKDL002A()
+        //Step 9.1 and 9.2
+        val nameStepHoliday: String = ksm005.getTextResource("KSM005_30")
+        ksm005.selectWorkTypeClickSubmitKDL002A(nameStepHoliday, monthlyPattern.legalHoliday?.value!!)
+
+        //Step 10. open dialog non holiday
+        ksm005.clickOpenDialogNonHolidayKDL002A()
+        //Step 10.1 and 10.2
+        val nameStepNonHoliday: String = ksm005.getTextResource("KSM005_31")
+        ksm005.selectWorkTypeClickSubmitKDL002A(nameStepNonHoliday, monthlyPattern.nonLegalHoliday?.value!!)
+
+        //Step 11
+        ksm005.clickButtonExecuteBatchSetting()
+        Assert.assertEquals(messInfoRegister, "Msg_15")
     }
 
 }

@@ -1,0 +1,11 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <monthlyPattern>
+        <patternCode value="100"></patternCode>
+        <patternName value="月間パターン"></patternName>
+        <workTime value="001"></workTime>
+        <workingDay value="001"></workingDay>
+        <legalHoliday value="002"></legalHoliday>
+        <nonLegalHoliday value="003"></nonLegalHoliday>
+    </monthlyPattern>
+</DATA>

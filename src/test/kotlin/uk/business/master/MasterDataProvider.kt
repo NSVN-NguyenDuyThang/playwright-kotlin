@@ -21,6 +21,8 @@ import shou.page.web.kmf003.ListAnnualVacation
 import shou.page.web.kmk003.Kml003Master
 import shou.page.web.kmk007.Kmk007Master
 import shou.page.web.kmk012.Kmk012Master
+import shou.page.web.ksm005.KSM005Master
+import shou.page.web.ksm005.MonthlyPattern
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
 import java.io.IOException
@@ -123,6 +125,13 @@ class MasterDataProvider {
     fun cas014(): Array<Array<Any?>> {
         val data: Map<String, Any> = readFile(Cas014Master(), "master", "cas014_master.xml")
         return arrayOf(arrayOf(data["position"]))
+    }
+
+    @DataProvider(name = "KSM005_MASTER")
+    fun ksm005(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(KSM005Master(), "master", "ksm005_master.xml")
+        val monthlyPattern = data["monthlyPattern"] as MonthlyPattern?
+        return arrayOf(monthlyPattern)
     }
 
 }
