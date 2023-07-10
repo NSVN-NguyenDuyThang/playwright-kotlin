@@ -3,6 +3,10 @@ package uk.business.master
 import org.testng.Assert
 import org.testng.annotations.Test
 import shou.BaseTest
+import shou.page.web.cas005.Cas005Page
+import shou.page.web.cas005.GeneralRole
+import shou.page.web.cas009.Cas009Page
+import shou.page.web.cas009.RoleInformation
 import shou.page.web.cmm008.Cmm008aPage
 import shou.page.web.cmm008.ListEmployment
 import shou.page.web.cmm011.Cmm011aPage
@@ -39,6 +43,8 @@ class MasterSetup() : BaseTest() {
     private lateinit var kmk012: Kmk012Page
     private lateinit var kmf001: Kmf001Page
     private lateinit var kmf003: Kmf003Page
+    private lateinit var cas005: Cas005Page
+    private lateinit var cas009: Cas009Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -98,7 +104,7 @@ class MasterSetup() : BaseTest() {
         }
     }
 
-    @Test(dataProvider = "WORKPLACE_DATA", dataProviderClass = MasterDataProvider::class)
+    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORKPLACE_DATA", dataProviderClass = MasterDataProvider::class)
     fun step007_cmm011_addWorkplace(period: Period, workplaceList: ListWorkplace) {
         cmm011a = createInstance(Cmm011aPage::class.java)
         cmm011a.openPageUrl(Companion.domain + PathList.CMM011A.value)
@@ -142,4 +148,44 @@ class MasterSetup() : BaseTest() {
         Assert.assertEquals(kmf003.registerGrantTime(annualVacation.frameList!!, annualVacation.grantTimesList!!), "Msg_15")
         kmf003.closeDialog()
     }
+
+    @Test(description = "test_010_cas005_ロールの登録(就業)", dataProvider = "CAS005_ROLE_DATA", dataProviderClass = MasterDataProvider::class)
+    fun step010_cas005_registerRole(role: GeneralRole) {
+        cas005 = createInstance(Cas005Page::class.java)
+        cas005.openPageUrl(domain + PathList.CAS005.value)
+        cas005.clickTab(role.titleTextRsId)
+        val isExist: Boolean? = cas005.checkCodeGridIsExist(role.code!!.value!!)
+        if (isExist == true) {
+            cas005.selectRowEdit(role.code)
+            cas005.clickButtonDelete()
+            cas005.getMessageResult()
+        }
+        cas005.clickTab(role.titleTextRsId)
+        cas005.clickButtonNew()
+        cas005.inputCode(role.code)
+        cas005.inputName(role.name!!)
+        cas005.selectComboEmployeeRefRange(role.employeeReferenceRange!!)
+        cas005.selectApprovalAuthority(role.approvalAuthority!!)
+        cas005.clickButtonSave()
+        Assert.assertEquals(cas005.getMessageResult(), "Msg_15")
+    }
+
+    @Test(description = "test_011_cas009_ロールの登録(個人情報)", dataProvider = "CAS009_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step011_cas009(role: RoleInformation) {
+        cas009 = createInstance(Cas009Page::class.java)
+        cas009.openPageUrl(domain + PathList.CAS009.value)
+        cas009.clickTabGeneral()
+        if (cas009.checkCodeGridIsExist(role.code!!) == true) {
+            cas009.selectRowEdit(role.code!!)
+        }
+        cas009.clickTabGeneral()
+        cas009.clickButtonNew()
+        cas009.inputCode(role.code!!)
+        cas009.inputName(role.name)
+        cas009.selectComboBox(role.employeeRefRange)
+        cas009.selectCheckBoxInTable(role.advancedSetting!!)
+        cas009.clickButtonSave()
+        Assert.assertEquals(cas009.getMessageResult(), "Msg_15")
+    }
+
 }

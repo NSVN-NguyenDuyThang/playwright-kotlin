@@ -1,0 +1,30 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <ListDataRegister titleTextRsId="CAS005_1" title="ロールの登録(就業)">
+        <items>
+            <dataRegister>
+                <generalRole titleTextRsId="CCG025_4" title="一般">
+                    <code titleTextRsId="CAS005_6" title="コード" value="0005"></code>
+                    <name titleTextRsId="CAS005_7" title="名称" value="アルバイト"></name>
+                    <employeeReferenceRange titleTextRsId="CAS005_8" title="社員参照範囲" value="部門・職場(配下含む）"></employeeReferenceRange>
+                    <approvalAuthority titleTextRsId="CAS005_16" title="承認権限" value="あり"></approvalAuthority>
+                </generalRole>
+            </dataRegister>
+            <dataRegister>
+                <responsiblePersonRole titleTextRsId="CCG025_3" title="担当">
+                    <code titleTextRsId="CAS005_6" title="コード" value="0007"></code>
+                    <name titleTextRsId="CAS005_7" title="名称" value="test"></name>
+                    <menuSetting titleTextRsId="CAS005_14" title="メニュー設定" value="003"></menuSetting>
+                </responsiblePersonRole>
+
+                <generalRole titleTextRsId="CCG025_4" title="一般">
+                    <code titleTextRsId="CAS005_6" title="コード" value="0007"></code>
+                    <name titleTextRsId="CAS005_7" title="名称" value="test"></name>
+                    <employeeReferenceRange titleTextRsId="CAS005_8" title="社員参照範囲"
+                                            value="自分のみ"></employeeReferenceRange>
+                    <approvalAuthority titleTextRsId="CAS005_16" title="承認権限" value="あり"></approvalAuthority>
+                </generalRole>
+            </dataRegister>
+        </items>
+    </ListDataRegister>
+</DATA>

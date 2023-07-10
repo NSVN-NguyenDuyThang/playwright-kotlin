@@ -1,6 +1,12 @@
 package uk.business.master
 
 import org.testng.annotations.DataProvider
+import shou.page.web.cas005.Cas005Master
+import shou.page.web.cas005.GeneralRole
+import shou.page.web.cas005.ListDataRegister
+import shou.page.web.cas009.Cas009Master
+import shou.page.web.cas009.General
+import shou.page.web.cas009.RoleInformation
 import shou.page.web.cmm008.Cmm008Master
 import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
@@ -14,6 +20,7 @@ import shou.page.web.kmk012.Kmk012Master
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
 import java.io.IOException
+import java.util.function.Function
 import javax.xml.parsers.ParserConfigurationException
 import javax.xml.transform.TransformerException
 
@@ -80,5 +87,23 @@ class MasterDataProvider {
     fun kmf003_getAnnualVacationData(): Array<Any?>? {
         val data: Map<String, Any> = readFile(Kmf003Master(), "master", "kmf003_master.xml")
         return (data["annualVacationList"] as ListAnnualVacation?)!!.items.toTypedArray()
-    };
+    }
+
+    @DataProvider(name = "CAS005_ROLE_DATA")
+    fun cas005_getRoleData(): Array<Array<Any>>? {
+        val data = readFile<Map<String, Any>>(Cas005Master(), "master", "cas005_register_role.xml")
+        val listDataRegister: ListDataRegister = data["listDataRegister"] as ListDataRegister
+        val dataRegisters: MutableList<GeneralRole> = ArrayList()
+        dataRegisters.addAll(listDataRegister.items.map { it.generalRole!! })
+        return dataRegisters.map { arrayOf<Any>(it) }.toTypedArray()
+    }
+
+    @DataProvider(name = "CAS009_MASTER")
+    fun cas009(): Array<Array<RoleInformation>> {
+        val data: Map<String, Any> = readFile(Cas009Master(), "master", "cas009_master.xml")
+        val result = mutableListOf<RoleInformation>()
+        val general: General = data["generalRoleInformation"] as General
+        result.add(general.roleInformation!!)
+        return result.map { arrayOf(it) }.toTypedArray()
+    }
 }
