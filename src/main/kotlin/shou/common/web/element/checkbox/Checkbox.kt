@@ -39,7 +39,7 @@ class Checkbox(override var page: Page, private val checkboxWrapper: String) : B
     }
 
     companion object {
-        private const val LABEL = "//span[text()]"
+        private const val LABEL = "//input/following-sibling::span"
         private const val INPUT = "//input"
     }
 
