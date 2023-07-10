@@ -15,5 +15,6 @@ enum class PathList(val value: String) {
     KMK012("nts.uk.at.web/view/kmk/012/a/index.xhtml"),
     KMF001("nts.uk.at.web/view/kmf/001/a/index.xhtml"),
     CAS005("nts.uk.com.web/view/cas/005/a/index.xhtml"),
-    CAS009("nts.uk.com.web/view/cas/009/a/index.xhtml")
+    CAS009("nts.uk.com.web/view/cas/009/a/index.xhtml"),
+    CAS011("nts.uk.com.web/view/cas/011/a/index.xhtml")
 }

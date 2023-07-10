@@ -1,0 +1,16 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <DataCas011 titleTextRsId="CAS011_1" title="ロールの登録(就業)">
+        <dataRegister>
+            <code titleTextRsId="CAS011_12" title="コード" value="05"></code>
+            <name titleTextRsId="CAS011_13" title="名称" value="アルバイト"></name>
+            <emplyeeRole titleTextRsId="CAS011_14" title="就業ロール" value=""></emplyeeRole>
+            <personRole titleTextRsId="CAS011_18" title="個人情報ロール" value=""></personRole>
+            <selection titleTextRsId="CAS011_48" title="選択可能なメニュー">
+                <selectables>
+                    <item title="選択可能なメニュー" value="905"></item>
+                </selectables>
+            </selection>
+        </dataRegister>
+    </DataCas011>
+</DATA>

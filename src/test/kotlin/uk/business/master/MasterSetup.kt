@@ -7,6 +7,9 @@ import shou.page.web.cas005.Cas005Page
 import shou.page.web.cas005.GeneralRole
 import shou.page.web.cas009.Cas009Page
 import shou.page.web.cas009.RoleInformation
+import shou.page.web.cas011.Cas011Master
+import shou.page.web.cas011.Cas011Page
+import shou.page.web.cas011.DataRegister
 import shou.page.web.cmm008.Cmm008aPage
 import shou.page.web.cmm008.ListEmployment
 import shou.page.web.cmm011.Cmm011aPage
@@ -45,6 +48,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var kmf003: Kmf003Page
     private lateinit var cas005: Cas005Page
     private lateinit var cas009: Cas009Page
+    private lateinit var cas011: Cas011Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -186,6 +190,23 @@ class MasterSetup() : BaseTest() {
         cas009.selectCheckBoxInTable(role.advancedSetting!!)
         cas009.clickButtonSave()
         Assert.assertEquals(cas009.getMessageResult(), "Msg_15")
+    }
+
+    @Test(description = "test_012_cas011_ロールセットの登録", dataProvider = "CAS011_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step012_cas011(dataRegister: DataRegister) {
+        cas011 = createInstance(Cas011Page::class.java)
+        cas011.openPageUrl(domain + PathList.CAS011.value)
+        if (cas011.isExistGridRole(dataRegister.code?.value!!)) {
+            Assert.assertTrue(true, String.format("コード「%s」は存在します」", dataRegister.code.value))
+        } else {
+            cas011.clickButtonNew()
+            cas011.inputCode(dataRegister.code)
+            cas011.inputName(dataRegister.code)
+            cas011.selectGrid1(dataRegister.selection?.selectables!!)
+            cas011.clickButtonMoveForward()
+            cas011.clickButtonSave()
+            Assert.assertEquals(cas011.getMessageResult(), "Msg_15")
+        }
     }
 
 }

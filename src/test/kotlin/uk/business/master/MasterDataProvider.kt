@@ -7,6 +7,9 @@ import shou.page.web.cas005.ListDataRegister
 import shou.page.web.cas009.Cas009Master
 import shou.page.web.cas009.General
 import shou.page.web.cas009.RoleInformation
+import shou.page.web.cas011.Cas011Master
+import shou.page.web.cas011.DataCas011
+import shou.page.web.cas011.DataRegister
 import shou.page.web.cmm008.Cmm008Master
 import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
@@ -104,6 +107,15 @@ class MasterDataProvider {
         val result = mutableListOf<RoleInformation>()
         val general: General = data["generalRoleInformation"] as General
         result.add(general.roleInformation!!)
+        return result.map { arrayOf(it) }.toTypedArray()
+    }
+
+    @DataProvider(name = "CAS011_MASTER")
+    fun cas011(): Array<Array<DataRegister>> {
+        val data: Map<String, Any> = readFile(Cas011Master(), "master", "cas011_master.xml")
+        val result = arrayListOf<DataRegister>()
+        val dataCas011 = data["dataRegister"] as DataCas011
+        result.add(dataCas011?.dataRegister!!)
         return result.map { arrayOf(it) }.toTypedArray()
     }
 }
