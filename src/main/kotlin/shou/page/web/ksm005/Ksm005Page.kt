@@ -69,13 +69,13 @@ class Ksm005Page() : BasePage() {
     }
 
     fun clickOpenDialogHolidayKDL002A() {
-        clickToElement("Open Holiday KDL002A", kdl003Dlg.locator(XPATH_ID_BUTTON_OPEN_DIALOG_LEGAL_HOLIDAY_KDL002A))
+        clickToElement("Open Holiday KDL002A", batchSettingDlg.locator(XPATH_ID_BUTTON_OPEN_DIALOG_LEGAL_HOLIDAY_KDL002A))
     }
 
     @Step("{0} : コード {1} 勤務種類 の行に を選択")
     fun selectWorkTypeClickSubmitKDL002A(stepName: String, workTypeCode: String) {
         //select row iggrid
-        val igGridWorkType = IgGrid(page, XPATH_ID_GRID_KDL002_WORK_TYPE)
+        val igGridWorkType = IgGrid(page, XPATH_ID_GRID_KDL002_WORK_TYPE, kdl002aDlg)
         val nameColumnCode = getTextResource("KDL002_3") //コード
         igGridWorkType.selectRowByCellName(nameColumnCode, workTypeCode)
         takeScreenshot("$stepName : コード $workTypeCode 勤務種類 の行に を選択")
@@ -85,11 +85,11 @@ class Ksm005Page() : BasePage() {
     }
 
     fun clickOpenDialogNonHolidayKDL002A() {
-        clickToElement("Open Non Holiday KDL002A", kdl003Dlg.locator(XPATH_ID_BUTTON_OPEN_DIALOG_NON_LEGAL_HOLIDAY_KDL002A))
+        clickToElement("Open Non Holiday KDL002A", batchSettingDlg.locator(XPATH_ID_BUTTON_OPEN_DIALOG_NON_LEGAL_HOLIDAY_KDL002A))
     }
 
     fun clickButtonExecuteBatchSetting() {
-        clickToElement("Click execute btn", batchSettingDlg.locator(String.format(XPATH_BUTTON_EXCUTE_BATCH_SETTING, "KSM005_34")))
+        clickToElement("Click execute btn", batchSettingDlg.locator(String.format(XPATH_BUTTON_EXCUTE_BATCH_SETTING, getTextResource("KSM005_34"))))
         closeMsgInfo("Msg_15")
     }
 
@@ -101,10 +101,10 @@ class Ksm005Page() : BasePage() {
         const val XPATH_ID_GRID_KDL003_WORK_TYPE = "//div[@id='list-worktype_container']"
         const val XPATH_ID_GRID_KDL003_WORK_TIME = "//div[@id='day-list-tbl_container']"
         const val TEXT_RESOURCE_BUTTON_SUBMIT_KDL003 = "KDL003_22"
-        const val XPATH_ID_BUTTON_OPEN_DIALOG_LEGAL_HOLIDAY_KDL002A = "xpath=//button[@tabindex='7']"
+        const val XPATH_ID_BUTTON_OPEN_DIALOG_LEGAL_HOLIDAY_KDL002A = "xpath=//button[contains(@data-bind, 'openDialogStatutoryHolidays')]"
         const val XPATH_ID_GRID_KDL002_WORK_TYPE = "//div[@id='multi-list_container']"
         const val XPATH_BUTTON_SUBMIT_KDL002 = "//button[@id='btnSetting']"
-        const val XPATH_ID_BUTTON_OPEN_DIALOG_NON_LEGAL_HOLIDAY_KDL002A = "xpath=//button[@tabindex='8']"
+        const val XPATH_ID_BUTTON_OPEN_DIALOG_NON_LEGAL_HOLIDAY_KDL002A = "xpath=//button[contains(@data-bind, 'openDialogNoneStatutoryHolidays')]"
         const val XPATH_BUTTON_EXCUTE_BATCH_SETTING =
             "xpath=//div[@id='functions-area-bottom']//button[contains(text(), '%s')]"
     }
