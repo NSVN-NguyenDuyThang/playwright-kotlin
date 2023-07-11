@@ -1,6 +1,7 @@
 package uk.business.master
 
 import org.testng.annotations.DataProvider
+import shou.BaseTest
 import shou.page.web.cas001.Cas001Master
 import shou.page.web.cas001.DataCas001
 import shou.page.web.cas005.Cas005Master
@@ -18,6 +19,9 @@ import shou.page.web.cmm011.Cmm011Master
 import shou.page.web.cmm013.Cmm013Master
 import shou.page.web.cmm014.Cmm014Master
 import shou.page.web.cmm029.Cmm029Master
+import shou.page.web.cps001.CPS001Master
+import shou.page.web.cps001.CategorySetting
+import shou.page.web.cps001.EmployeeList
 import shou.page.web.cps002.CPS002RegisterEmployee
 import shou.page.web.cps002.EmployeeSettingList
 import shou.page.web.kmf003.Kmf003Master
@@ -152,5 +156,17 @@ class MasterDataProvider {
         return arrayOf(arrayOf(dataCas001))
     }
 
+    @DataProvider(name = "CPS001_MASTER")
+    fun cps001(): Array<Array<CategorySetting?>> {
+        val data: Map<String, Any> = readFile(CPS001Master(), "master", "cps001_master.xml")
+        val categorySettings: MutableList<CategorySetting?> = ArrayList()
+        val employeeList = data["employees"] as EmployeeList?
+        val categorySetting = data["categorySetting"] as CategorySetting?
+        val employeeLoginCD = data["employeeLoginCD"] as String
+        BaseTest.Companion.loginOther = BaseTest.Companion.employees[employeeLoginCD]
+        categorySetting?.employees = employeeList!!.items
+        categorySettings.add(categorySetting)
+        return categorySettings.map { arrayOf(it) }.toTypedArray()
+    }
 
 }

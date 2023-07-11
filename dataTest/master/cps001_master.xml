@@ -1,0 +1,18 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<Employee>
+		<items>
+			<item code="10000011" select="0"/>
+			<item code="10000012" select="1"/>
+		</items>
+	</Employee>
+	<Category>
+		<itemSetting name="代休・振休等">
+			<settingList>
+				<nameSetting titleTextRsId="KDL005_16" title="代休残数" value="1.0"/>
+				<nameSetting titleTextRsId="KSP001_49" title="公休残数" value="0.0"/>
+			</settingList>
+		</itemSetting>
+	</Category>
+	<EmployeeLoginCD>10000011</EmployeeLoginCD>
+</DATA>
