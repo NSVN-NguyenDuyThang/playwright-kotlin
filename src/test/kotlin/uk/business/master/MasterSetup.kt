@@ -3,8 +3,12 @@ package uk.business.master
 import org.testng.Assert
 import org.testng.annotations.Test
 import shou.BaseTest
+import shou.page.web.cas001.Cas001Page
+import shou.page.web.cas001.Category
+import shou.page.web.cas001.DataCas001
 import shou.page.web.cas005.Cas005Page
 import shou.page.web.cas005.GeneralRole
+import shou.page.web.cas005.ItemValue
 import shou.page.web.cas009.Cas009Page
 import shou.page.web.cas009.RoleInformation
 import shou.page.web.cas011.Cas011Page
@@ -37,6 +41,8 @@ import shou.page.web.ksm005.Ksm005Page
 import shou.page.web.ksm005.MonthlyPattern
 import shou.path.PathList
 import shou.utils.model.Period
+import java.util.function.Consumer
+
 
 class MasterSetup() : BaseTest() {
     private lateinit var cmm011a: Cmm011aPage
@@ -55,6 +61,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas014: Cas014Page
     private lateinit var ksm005: Ksm005Page
     private lateinit var cps002: Cps002Page
+    private lateinit var cas001: Cas001Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -272,6 +279,36 @@ class MasterSetup() : BaseTest() {
             employeeSetting.cardNo = companyCode + employeeSetting.cardNo
             employeeSetting.loginId = companyCode + employeeSetting.loginId
             Assert.assertEquals(cps002.settingMaster(employeeSetting), cps002.contendActual())
+        }
+    }
+
+    @Test(description = "test_016_cas001_個人情報アクセス権限の設定", dataProvider = "CAS001_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step016_cas001(setting: DataCas001) {
+        cas001 = createInstance(Cas001Page::class.java)
+        cas001.openPageUrl(domain + PathList.CAS001.value)
+        val general = setting.general
+        val person = setting.person
+        cas001.selectTab(general!!.titleTextRsId)
+        cas001.selectRowGridRole(general.role!!.rowSelect!!)
+        general.categorys!!.forEach { (rowSelect, permissionSettingOther, permissionSettingPersonal, usageAuthoritySetting1): Category ->
+            cas001.selectRowGridCategory(rowSelect!!)
+            cas001.selectRadioPermission(permissionSettingOther!!)
+            cas001.selectRadioPermission(permissionSettingPersonal!!)
+            cas001.checkAllGridUsageAuthoritySetting(usageAuthoritySetting1!!.selectAll!!)
+            usageAuthoritySetting1.settings!!.forEach { cas001.selectRadioGridUsageAuthoritySetting(it) }
+            cas001.clickButtonSave()
+            Assert.assertEquals(cas001.getMessageResult(), "Msg_15")
+        }
+        cas001.selectTab(person!!.titleTextRsId)
+        cas001.selectRowGridRole(person.role!!.rowSelect!!)
+        person.categorys!!.forEach { (rowSelect, permissionSettingOther, permissionSettingPersonal, usageAuthoritySetting1): Category ->
+            cas001.selectRowGridCategory(rowSelect!!)
+            cas001.selectRadioPermission(permissionSettingOther!!)
+            cas001.selectRadioPermission(permissionSettingPersonal!!)
+            cas001.checkAllGridUsageAuthoritySetting(usageAuthoritySetting1!!.selectAll!!)
+            usageAuthoritySetting1.settings!!.forEach{ cas001.selectRadioGridUsageAuthoritySetting(it) }
+            cas001.clickButtonSave()
+            Assert.assertEquals(cas001.getMessageResult(), "Msg_15")
         }
     }
 

@@ -1,6 +1,8 @@
 package uk.business.master
 
 import org.testng.annotations.DataProvider
+import shou.page.web.cas001.Cas001Master
+import shou.page.web.cas001.DataCas001
 import shou.page.web.cas005.Cas005Master
 import shou.page.web.cas005.GeneralRole
 import shou.page.web.cas005.ListDataRegister
@@ -27,6 +29,9 @@ import shou.page.web.ksm005.KSM005Master
 import shou.page.web.ksm005.MonthlyPattern
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
+import java.io.IOException
+import javax.xml.parsers.ParserConfigurationException
+import javax.xml.transform.TransformerException
 
 
 class MasterDataProvider {
@@ -139,5 +144,13 @@ class MasterDataProvider {
         val settingList: EmployeeSettingList = data["employeeSettingList"] as EmployeeSettingList
         return arrayOf(settingList)
     }
+
+    @DataProvider(name = "CAS001_MASTER")
+    fun cas001(): Array<Array<Any?>>? {
+        val data: Map<String, Any> = readFile(Cas001Master(), "master", "cas001_master.xml")
+        val dataCas001 = data["dataCas001"] as DataCas001?
+        return arrayOf(arrayOf(dataCas001))
+    }
+
 
 }
