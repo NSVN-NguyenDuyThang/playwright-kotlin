@@ -21,6 +21,8 @@ import shou.page.web.cmm014.Cmm014Page
 import shou.page.web.cmm014.ListClassification
 import shou.page.web.cmm029.Cmm029aPage
 import shou.page.web.cmm029.WorkSettingList
+import shou.page.web.cps002.Cps002Page
+import shou.page.web.cps002.EmployeeSettingList
 import shou.page.web.kmf001.Kmf001Page
 import shou.page.web.kmf003.AnnualVacation
 import shou.page.web.kmf003.Kmf003Page
@@ -35,8 +37,6 @@ import shou.page.web.ksm005.Ksm005Page
 import shou.page.web.ksm005.MonthlyPattern
 import shou.path.PathList
 import shou.utils.model.Period
-import java.util.*
-
 
 class MasterSetup() : BaseTest() {
     private lateinit var cmm011a: Cmm011aPage
@@ -54,6 +54,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas011: Cas011Page
     private lateinit var cas014: Cas014Page
     private lateinit var ksm005: Ksm005Page
+    private lateinit var cps002: Cps002Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -261,6 +262,17 @@ class MasterSetup() : BaseTest() {
         //Step 11
         ksm005.clickButtonExecuteBatchSetting()
         Assert.assertEquals(messInfoRegister, "Msg_15")
+    }
+
+    @Test(description = "test_015_CPS002_個人情報の新規登録", dataProvider = "CPS002_REGISTER_EMPLOYEE", dataProviderClass = MasterDataProvider::class)
+    fun step015_cps002(employeeSettings: EmployeeSettingList) {
+        cps002 = createInstance(Cps002Page::class.java)
+        cps002.openPageUrl(domain + PathList.CPS002.value)
+        employeeSettings.items.forEach { employeeSetting ->
+            employeeSetting.cardNo = companyCode + employeeSetting.cardNo
+            employeeSetting.loginId = companyCode + employeeSetting.loginId
+            Assert.assertEquals(cps002.settingMaster(employeeSetting), cps002.contendActual())
+        }
     }
 
 }

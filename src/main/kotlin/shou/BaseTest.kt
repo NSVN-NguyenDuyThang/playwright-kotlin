@@ -55,7 +55,7 @@ open class BaseTest {
         Companion.cloudEnv = cloudEnv
         Companion.webMode = webMode
         /*get account login cps002 */
-        val objs: Map<String, Any> = readFile(CPS002RegisterEmployee(), "master", "cps002_register_empolyee.xml")
+        val objs: Map<String, Any> = readFile(CPS002RegisterEmployee(), "master", "cps002_register_employee.xml")
         val employeeSettingList: EmployeeSettingList = objs["employeeSettingList"] as EmployeeSettingList
         employees = employeeSettingList.items.map {it.employeeCode!! to EmployeeLogin(companyCode, it.employeeCode!!, it.password!!) }.toMap()
         deleteAllureReport()
