@@ -17,11 +17,11 @@ class IgGrid(override var page: Page, private val gridWrapper: String) : BasePag
     }
 
     fun getRow(cellName: String, value: String): IgRow {
-        val elements: Locator = finds(cellName, listOf(value))
-        if (elements.count() == 0) {
-            throw NoSuchElementException("Row with cell name '$cellName' and cell value '$value' not found.")
+        val elements: Locator? = finds(cellName, listOf(value))
+        elements?.let {
+            return IgRow(page, elements)
         }
-        return IgRow(page, elements)
+        throw NoSuchElementException("Row with cell name '$cellName' and cell value '$value' not found.")
     }
 
     private fun finds(cellName: String, values: List<String>): Locator {
