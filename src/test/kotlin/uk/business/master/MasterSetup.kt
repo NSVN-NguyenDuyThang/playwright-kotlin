@@ -39,9 +39,12 @@ import shou.page.web.kmk007.ListWorktype
 import shou.page.web.kmk012.Kmk012Page
 import shou.page.web.kmk012.ListClosure
 import shou.page.web.kmk012.ListClosureForEmployment
+import shou.page.web.ksm004.CalendarRegistration
+import shou.page.web.ksm004.Ksm004Page
 import shou.page.web.ksm005.Ksm005Page
 import shou.page.web.ksm005.MonthlyPattern
 import shou.path.PathList
+import shou.utils.DataFaker
 import shou.utils.model.Period
 
 
@@ -65,6 +68,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas001: Cas001Page
     private lateinit var cps001: Cps001Page
     private lateinit var cas013: Cas013Page
+    private lateinit var ksm004: Ksm004Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -339,6 +343,50 @@ class MasterSetup() : BaseTest() {
         cas013.inputPeriod(dataRegister.periodStart!!, dataRegister.periodEnd!!)
         cas013.clickButtonSave()
         Assert.assertEquals(cas013.getMessageResult(), "Msg_15")
+    }
+
+    @Test(description = "test_019_ksm004_カレンダーの登録", groups = [LOGIN_OTHER], dataProvider = "KSM004_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step019_ksm004(calendarRegistration: CalendarRegistration) {
+        ksm004 = createInstance(Ksm004Page::class.java)
+        ksm004.openPageUrl(domain + PathList.KSM004.value)
+        val yearMonth: String = DataFaker.getSystemYearMonth() //get system date
+        val endDate: String = DataFaker.addMonthsFromSystemDate(6) //get system date + 6 month
+        //tab company
+        val companySetting = calendarRegistration.items!![0]
+        ksm004.selectTabCompany()
+        ksm004.inputDateTabCompany(yearMonth)
+        ksm004.clickOpenDialogKSM004D()
+        ksm004.inputDataStartDateAndEndDateDialogKSM004D(yearMonth, endDate)
+        ksm004.selectRadioKSM004D(companySetting)
+        ksm004.clickButtonSubmitDialogKDL004D()
+        val messCompany: String = ksm004.clickButtonSaveCompany()
+
+        //tab workplace
+        val wplSetting = calendarRegistration.items[1]
+        val workplaceCode = wplSetting.code!!.value
+        ksm004.selectTabWorkplace()
+        ksm004.selectRowWorkplaceCode(workplaceCode!!)
+        ksm004.inputDateTabWorkplace(yearMonth)
+        ksm004.clickOpenDialogKSM004DTabWorkplace()
+        ksm004.inputDataStartDateAndEndDateDialogKSM004D(yearMonth, endDate)
+        ksm004.selectRadioKSM004D(wplSetting)
+        ksm004.clickButtonSubmitDialogKDL004D()
+        val messWorkplace: String = ksm004.clickButtonSaveWorkplace()
+
+        //tab class
+        val classSetting = calendarRegistration.items[2]
+        val classCode = classSetting.code!!.value
+        ksm004.selectTabClass()
+        ksm004.selectRowGridClassification(classCode!!)
+        ksm004.inputDateTabClassification(yearMonth)
+        ksm004.clickOpenDialogKSM004DTabClass()
+        ksm004.inputDataStartDateAndEndDateDialogKSM004D(yearMonth, endDate)
+        ksm004.selectRadioKSM004D(classSetting)
+        ksm004.clickButtonSubmitDialogKDL004D()
+        val messClass: String = ksm004.clickButtonSaveClassification()
+        Assert.assertEquals(messCompany, "Msg_15")
+        Assert.assertEquals(messWorkplace, "Msg_15")
+        Assert.assertEquals(messClass, "Msg_15")
     }
 
 }

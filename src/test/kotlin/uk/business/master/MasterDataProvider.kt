@@ -30,6 +30,8 @@ import shou.page.web.kmf003.ListAnnualVacation
 import shou.page.web.kmk003.Kml003Master
 import shou.page.web.kmk007.Kmk007Master
 import shou.page.web.kmk012.Kmk012Master
+import shou.page.web.ksm004.CalendarRegistration
+import shou.page.web.ksm004.KSM004Master
 import shou.page.web.ksm005.KSM005Master
 import shou.page.web.ksm005.MonthlyPattern
 import shou.utils.xml.XmlHelper
@@ -176,5 +178,16 @@ class MasterDataProvider {
         val dataCas013: shou.page.web.cas013.DataRegister = data["dataRegister"] as shou.page.web.cas013.DataRegister
         return arrayOf(arrayOf(dataCas013))
     }
+
+
+    @DataProvider(name = "KSM004_MASTER")
+
+    fun ksm004(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(KSM004Master(), "master", "ksm004_master.xml")
+        val calendarRegistration = data["calendarRegistration"] as CalendarRegistration
+        BaseTest.Companion.loginOther = BaseTest.Companion.employees[data["employeeLoginCD"]]
+        return arrayOf(calendarRegistration)
+    }
+
 
 }
