@@ -1,0 +1,10 @@
+<?xml version = "1.0" ?>
+<DATA>
+		<DataRegister>
+			<employeeId titleTextRsId="CAS013_37" title="検索文字列" value="10000010"></employeeId>
+			<system titleTextRsId="CAS013_6" title="システム" value="就業"></system>
+			<roll titleTextRsId="CAS013_8" title="ロール" value="0001"></roll>
+			<periodStart titleTextRsId="CAS013_18" title="期間開始日付" value="2023/01/01"></periodStart>
+			<periodEnd titleTextRsId="CAS013_20" title="期間終了日付" value="9999/12/31"></periodEnd>
+		</DataRegister>
+</DATA>

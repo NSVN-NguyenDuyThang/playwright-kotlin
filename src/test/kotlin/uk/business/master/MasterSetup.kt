@@ -12,6 +12,7 @@ import shou.page.web.cas009.Cas009Page
 import shou.page.web.cas009.RoleInformation
 import shou.page.web.cas011.Cas011Page
 import shou.page.web.cas011.DataRegister
+import shou.page.web.cas013.Cas013Page
 import shou.page.web.cas014.Cas014Page
 import shou.page.web.cas014.Position
 import shou.page.web.cmm008.Cmm008aPage
@@ -63,6 +64,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cps002: Cps002Page
     private lateinit var cas001: Cas001Page
     private lateinit var cps001: Cps001Page
+    private lateinit var cas013: Cas013Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -318,6 +320,25 @@ class MasterSetup() : BaseTest() {
         cps001 = createInstance(Cps001Page::class.java)
         cps001.openPageUrl(domain + PathList.CPS001.value)
         Assert.assertEquals(cps001.settingCategory(categorySetting!!), "Msg_15")
+    }
+
+    @Test(groups = [LOGIN_DEFAULT], description = "test_018_cas013_担当ロールの付与", dataProvider = "CAS013_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step018_cas013(dataRegister: shou.page.web.cas013.DataRegister) {
+        cas013 = createInstance(Cas013Page::class.java)
+        cas013.openPageUrl(domain + PathList.CAS013.value)
+        if (cas013.checkCodeGridRoleIsExist(dataRegister.employeeId!!.value!!)) {
+            cas013.selectRowGridRole(dataRegister.employeeId!!.value!!)
+            cas013.clickButtonDelete()
+            cas013.getMessageResult()
+        }
+        cas013.clickButtonNew()
+        cas013.selectInformationOnPersonalChoiceDlg(dataRegister)
+
+        cas013.selectDropdownSystem(dataRegister.system!!)
+        cas013.selectDropdownRoll(dataRegister.roll!!)
+        cas013.inputPeriod(dataRegister.periodStart!!, dataRegister.periodEnd!!)
+        cas013.clickButtonSave()
+        Assert.assertEquals(cas013.getMessageResult(), "Msg_15")
     }
 
 }

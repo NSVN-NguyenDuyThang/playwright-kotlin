@@ -13,6 +13,7 @@ import shou.page.web.cas009.RoleInformation
 import shou.page.web.cas011.Cas011Master
 import shou.page.web.cas011.DataCas011
 import shou.page.web.cas011.DataRegister
+import shou.page.web.cas013.Cas013Master
 import shou.page.web.cas014.Cas014Master
 import shou.page.web.cmm008.Cmm008Master
 import shou.page.web.cmm011.Cmm011Master
@@ -167,6 +168,13 @@ class MasterDataProvider {
         categorySetting?.employees = employeeList!!.items
         categorySettings.add(categorySetting)
         return categorySettings.map { arrayOf(it) }.toTypedArray()
+    }
+
+    @DataProvider(name = "CAS013_MASTER")
+    fun cas013(): Array<Array<Any>>? {
+        val data: Map<String, Any> = readFile(Cas013Master(), "master", "cas013_master.xml")
+        val dataCas013: shou.page.web.cas013.DataRegister = data["dataRegister"] as shou.page.web.cas013.DataRegister
+        return arrayOf(arrayOf(dataCas013))
     }
 
 }
