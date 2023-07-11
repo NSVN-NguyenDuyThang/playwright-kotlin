@@ -224,7 +224,7 @@ open class BaseTest {
         const val LOGIN_OTHER: String = "LOGIN_OTHER"
 
         /*key: employeeCode*/
-        protected var employees: Map<String, EmployeeLogin> = HashMap()
-        protected var loginOther: EmployeeLogin? = null
+        internal var employees: Map<String, EmployeeLogin> = HashMap()
+        internal var loginOther: EmployeeLogin? = null
     }
 }
