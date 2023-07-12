@@ -34,6 +34,7 @@ import shou.page.web.ksm004.CalendarRegistration
 import shou.page.web.ksm004.KSM004Master
 import shou.page.web.ksm005.KSM005Master
 import shou.page.web.ksm005.MonthlyPattern
+import shou.page.web.ksm006.*
 import shou.utils.xml.XmlHelper
 import shou.utils.xml.XmlHelper.readFile
 import java.io.IOException
@@ -189,5 +190,14 @@ class MasterDataProvider {
         return arrayOf(calendarRegistration)
     }
 
-
+    @DataProvider(name = "KSM006_MASTER")
+    fun test_016_ksm006(): Array<Any>? {
+        val data: Map<String, Any> = readFile(KSM006Master(), "master", "ksm006_master.xml")
+        val company: Company = data["company"] as Company
+        val workplace: Workplace = data["workplace"] as Workplace
+        val classification: Classification? = data["classification"] as Classification
+        val dataRegisterWork = DataRegisterWork(company, workplace, classification)
+        BaseTest.Companion.loginOther = BaseTest.employees[data["employeeLoginCD"]]
+        return arrayOf(dataRegisterWork)
+    }
 }

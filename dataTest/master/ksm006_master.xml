@@ -1,0 +1,38 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <employeeLoginCD>10000010</employeeLoginCD>
+    <!--use Tab 会社 (company)-->
+    <company>
+        <gridSelected code="">
+            <worktypes>
+                <item titleTextRsId="KSM006_8" value="001"></item>
+                <item titleTextRsId="KSM006_9" value="002"></item>
+                <item titleTextRsId="KSM006_10" value="003"></item>
+            </worktypes>
+        </gridSelected>
+        <itemWorkTime value="001"></itemWorkTime>
+    </company>
+    <!--use Tab 職場 (workplace)-->
+    <workplace>
+        <gridSelected code="0000000231">
+                <worktypes>
+                    <item titleTextRsId="KSM006_8" value="001"></item>
+                    <item titleTextRsId="KSM006_9" value="002"></item>
+                    <item titleTextRsId="KSM006_10" value="003"></item>
+                </worktypes>
+        </gridSelected>
+        <itemWorkTime value="001"></itemWorkTime>
+    </workplace>
+
+    <!--use Tab 分類 (class)-->
+    <classification>
+        <gridSelected code="0000000001">
+                <worktypes>
+                    <item titleTextRsId="KSM006_8" value="001"></item>
+                    <item titleTextRsId="KSM006_9" value="002"></item>
+                    <item titleTextRsId="KSM006_10" value="003"></item>
+                </worktypes>
+        </gridSelected>
+        <itemWorkTime value="001"></itemWorkTime>
+    </classification>
+</DATA>

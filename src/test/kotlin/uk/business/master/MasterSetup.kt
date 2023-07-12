@@ -43,6 +43,7 @@ import shou.page.web.ksm004.CalendarRegistration
 import shou.page.web.ksm004.Ksm004Page
 import shou.page.web.ksm005.Ksm005Page
 import shou.page.web.ksm005.MonthlyPattern
+import shou.page.web.ksm006.*
 import shou.path.PathList
 import shou.utils.DataFaker
 import shou.utils.model.Period
@@ -69,6 +70,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cps001: Cps001Page
     private lateinit var cas013: Cas013Page
     private lateinit var ksm004: Ksm004Page
+    private lateinit var ksm006: Ksm006Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -384,6 +386,63 @@ class MasterSetup() : BaseTest() {
         ksm004.selectRadioKSM004D(classSetting)
         ksm004.clickButtonSubmitDialogKDL004D()
         val messClass: String = ksm004.clickButtonSaveClassification()
+        Assert.assertEquals(messCompany, "Msg_15")
+        Assert.assertEquals(messWorkplace, "Msg_15")
+        Assert.assertEquals(messClass, "Msg_15")
+    }
+
+    @Test(description = "test_020_ksm006_基本勤務の登録", groups = [LOGIN_OTHER], dataProvider = "KSM006_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step020_ksm006(registerWork: DataRegisterWork) {
+        ksm006 = createInstance(Ksm006Page::class.java)
+        ksm006.openPageUrl(domain + PathList.KSM006.value)
+        //tab company
+        val dataCompany: Company? = registerWork.company
+        val workTime: String? = dataCompany?.itemWorkTime?.value
+        val workTypeKDL003: String? = dataCompany?.gridSelected?.worktypes?.get(0)?.value
+        val workTypeKDL002: String? = dataCompany?.gridSelected?.worktypes?.get(1)?.value //法定休日
+        val workTypeKDL002_2: String? = dataCompany?.gridSelected?.worktypes?.get(2)?.value //法定外休日
+        ksm006.selectTabCompany()
+        ksm006.clickOpenDialogWorkingDayKDL003()
+        ksm006.selectWorkTypeAndWordTimeAndClickSubmitKDL003(workTypeKDL003!!, workTime!!)
+        ksm006.clickOpenDialogHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_30"), workTypeKDL002!!)
+        ksm006.clickOpenDialogNonHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_31"), workTypeKDL002_2!!)
+        val messCompany: String = ksm006.clickButtonRegister()!!
+
+        //tab work place
+        val dataWorkplace: Workplace? = registerWork.workplace
+        val workplaceCode: String? = dataWorkplace?.gridSelected?.code
+        val wplWorkTime: String? = dataWorkplace?.itemWorkTime?.value
+        val wplWorkTypeKDL003: String? = dataWorkplace?.gridSelected?.worktypes?.get(0)?.value
+        val wplWorkTypeKDL002: String? = dataWorkplace?.gridSelected?.worktypes?.get(1)?.value //法定休日
+        val wplWorkTypeKDL002_2: String? = dataWorkplace?.gridSelected?.worktypes?.get(2)?.value //法定外休日
+        ksm006.clickTabWorkPlace()
+        ksm006.selectRowTreGridWorkplaceCode(workplaceCode!!)
+        ksm006.clickOpenDialogWorkingDayKDL003()
+        ksm006.selectWorkTypeAndWordTimeAndClickSubmitKDL003(wplWorkTypeKDL003!!, wplWorkTime!!)
+        ksm006.clickOpenDialogHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_30"), wplWorkTypeKDL002!!)
+        ksm006.clickOpenDialogNonHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_31"), wplWorkTypeKDL002_2!!)
+        val messWorkplace: String = ksm006.clickButtonRegister()!!
+
+        //tab Classification
+        val classification: Classification? = registerWork.classification
+        val classificationCode: String? = classification?.gridSelected?.code
+        val classWorkTime: String? = classification?.itemWorkTime?.value
+        val classWorkTypeKDL003: String? = classification?.gridSelected?.worktypes?.get(0)?.value
+        val classWorkTypeKDL002: String? = classification?.gridSelected?.worktypes?.get(1)?.value //法定休日
+        val classWorkTypeKDL002_2: String? = classification?.gridSelected?.worktypes?.get(2)?.value //法定外休日
+        ksm006.clickTabClassification()
+        ksm006.selectRowGridClassification(classificationCode!!)
+        ksm006.clickOpenDialogWorkingDayKDL003()
+        ksm006.selectWorkTypeAndWordTimeAndClickSubmitKDL003(classWorkTypeKDL003!!, classWorkTime!!)
+        ksm006.clickOpenDialogHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_30"), classWorkTypeKDL002!!)
+        ksm006.clickOpenDialogNonHolidayKDL002()
+        ksm006.selectWorkTypeClickSubmitKDL002(ksm006.getTextResource("KSM005_31"), classWorkTypeKDL002_2!!)
+        val messClass: String = ksm006.clickButtonRegister()!!
         Assert.assertEquals(messCompany, "Msg_15")
         Assert.assertEquals(messWorkplace, "Msg_15")
         Assert.assertEquals(messClass, "Msg_15")
