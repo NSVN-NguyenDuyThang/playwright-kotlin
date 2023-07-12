@@ -1,0 +1,10 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListClassification>
+		<items>
+			<classification code="0000000001" name="正社員"/>
+			<classification code="0000000002" name="正社員１"/>
+			<classification code="0000000003" name="アルバイト"/>
+		</items>
+	</ListClassification>
+</DATA>

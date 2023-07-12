@@ -1,0 +1,68 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<DataCas001 titleTextRsId="CAS001_1" title="個人情報アクセス権限の設定">
+        <general titleTextRsId="CCG025_4" title="一般">
+				<role>
+					<rowSelect title="権限一覧" value="0001"></rowSelect>
+				</role>
+
+				<categorys>
+                    <category>
+                        <rowSelect title="カテゴリ一覧" value="年休情報"></rowSelect>
+                        <permissionSettingOther titleTextRsId="CAS001_24" title="他人の情報利用" value="可"></permissionSettingOther>
+                        <permissionSettingPersonal titleTextRsId="CAS001_26" title="本人の情報利用" value="可"></permissionSettingPersonal>
+                        <usageAuthoritySetting selectAll="true">
+                            <settings>
+                                <setting titleTextRsId="CAS001_48" title="他人の情報利用権限設定" value="更新可能"></setting>
+                                <setting titleTextRsId="CAS001_52" title="本人の情報利用権限設定" value="更新可能"></setting>
+                            </settings>
+                        </usageAuthoritySetting>
+                    </category>
+
+                    <category>
+                        <rowSelect title="カテゴリ一覧" value="代休・振休等"></rowSelect>
+                        <permissionSettingOther titleTextRsId="CAS001_24" title="他人の情報利用" value="可"></permissionSettingOther>
+                        <permissionSettingPersonal titleTextRsId="CAS001_26" title="本人の情報利用" value="可"></permissionSettingPersonal>
+                        <usageAuthoritySetting selectAll="true">
+                            <settings>
+                                <setting titleTextRsId="CAS001_48" title="他人の情報利用権限設定" value="更新可能"></setting>
+                                <setting titleTextRsId="CAS001_52" title="本人の情報利用権限設定" value="更新可能"></setting>
+                            </settings>
+                        </usageAuthoritySetting>
+                    </category>
+				</categorys>
+            </general>
+
+        <person titleTextRsId="CCG025_3" title="担当">
+            <role>
+                <rowSelect title="権限一覧" value="0001"></rowSelect>
+            </role>
+
+            <categorys>
+                <category>
+                    <rowSelect title="カテゴリ一覧" value="年休情報"></rowSelect>
+                    <permissionSettingOther titleTextRsId="CAS001_24" title="他人の情報利用" value="可"></permissionSettingOther>
+                    <permissionSettingPersonal titleTextRsId="CAS001_26" title="本人の情報利用" value="可"></permissionSettingPersonal>
+                    <usageAuthoritySetting selectAll="true">
+                        <settings>
+                            <setting titleTextRsId="CAS001_48" title="他人の情報利用権限設定" value="更新可能"></setting>
+                            <setting titleTextRsId="CAS001_52" title="本人の情報利用権限設定" value="更新可能"></setting>
+                        </settings>
+                    </usageAuthoritySetting>
+                </category>
+
+                <category>
+                    <rowSelect title="カテゴリ一覧" value="代休・振休等"></rowSelect>
+                    <permissionSettingOther titleTextRsId="CAS001_24" title="他人の情報利用" value="可"></permissionSettingOther>
+                    <permissionSettingPersonal titleTextRsId="CAS001_26" title="本人の情報利用" value="可"></permissionSettingPersonal>
+                    <usageAuthoritySetting selectAll="true">
+                        <settings>
+                            <setting titleTextRsId="CAS001_48" title="他人の情報利用権限設定" value="更新可能"></setting>
+                            <setting titleTextRsId="CAS001_52" title="本人の情報利用権限設定" value="更新可能"></setting>
+                        </settings>
+                    </usageAuthoritySetting>
+                </category>
+            </categorys>
+        </person>
+	</DataCas001>
+</DATA>

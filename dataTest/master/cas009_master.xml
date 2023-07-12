@@ -1,0 +1,12 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<!--use Tab 一般-->
+	<general>
+		<!--use for case register-->
+		<roleInformation code="0003" name="アルバイト">
+			<advancedSetting>
+				<item settingName="社員の削除ができる" used="true"/>
+			</advancedSetting>
+		</roleInformation>
+	</general>
+</DATA>

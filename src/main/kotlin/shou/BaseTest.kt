@@ -11,7 +11,10 @@ import shou.common.model.EmployeeLogin
 import shou.common.web.BasePage
 import shou.page.mobile.ccg.Ccg007MobilePage
 import shou.page.web.ccg007.Ccg007Page
+import shou.page.web.cps002.CPS002RegisterEmployee
+import shou.page.web.cps002.EmployeeSettingList
 import shou.path.PathList
+import shou.utils.xml.XmlHelper.readFile
 import java.awt.Toolkit
 import java.io.ByteArrayInputStream
 import java.io.File
@@ -20,6 +23,9 @@ import java.lang.reflect.Method
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.function.Function
+import java.util.stream.Collectors
+
 
 open class BaseTest {
     protected lateinit var playwright: Playwright
@@ -48,6 +54,10 @@ open class BaseTest {
         Companion.domain = domain
         Companion.cloudEnv = cloudEnv
         Companion.webMode = webMode
+        /*get account login cps002 */
+        val objs: Map<String, Any> = readFile(CPS002RegisterEmployee(), "master", "cps002_register_employee.xml")
+        val employeeSettingList: EmployeeSettingList = objs["employeeSettingList"] as EmployeeSettingList
+        employees = employeeSettingList.items.map {it.employeeCode!! to EmployeeLogin(companyCode, it.employeeCode!!, it.password!!) }.toMap()
         deleteAllureReport()
         deleteDownloadedFileFromDir()
         deleteRecordVideoFromDir()
@@ -202,6 +212,7 @@ open class BaseTest {
         protected lateinit var browserName: String
         protected lateinit var contractCode: String
         protected lateinit var contractPW: String
+        @JvmStatic
         protected lateinit var companyCode: String
         protected lateinit var employeeCode: String
         protected lateinit var employeePW: String
@@ -211,6 +222,9 @@ open class BaseTest {
         private var isFirstLoginOfSession = false
         const val LOGIN_DEFAULT: String = "LOGIN_DEFAULT"
         const val LOGIN_OTHER: String = "LOGIN_OTHER"
-        protected var loginOther: EmployeeLogin? = null
+
+        /*key: employeeCode*/
+        internal var employees: Map<String, EmployeeLogin> = HashMap()
+        internal var loginOther: EmployeeLogin? = null
     }
 }

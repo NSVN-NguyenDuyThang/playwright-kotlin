@@ -51,8 +51,8 @@ class IgRow(override var page: Page, var row: Locator) : BasePage(), ElementActi
     }
 
     companion object {
-        const val FIND_TD_BY_INDEX = ".//td[%s]"
-        const val FIND_TD_BY_VALUE = ".//td[text()='%s']"
-        const val CHECKBOX = ".//span[@name='chk']"
+        const val FIND_TD_BY_INDEX = "//td[%s]"
+        const val FIND_TD_BY_VALUE = "//td[text()='%s']"
+        const val CHECKBOX = "//span[@name='chk']"
     }
 }

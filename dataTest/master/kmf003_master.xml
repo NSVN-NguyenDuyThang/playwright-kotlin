@@ -1,0 +1,41 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListAnnualVacation>
+		<items>
+			<vacation code="01" name="年休付与" calStandardForAnnualWorkingDays="KMF003_17" annualVacationGrantCriteria="KMF003_21" >
+				<frameList>
+					<items>
+						<condition frame="KMF003_23" value="0" useSettingOfFrame="true"/>
+					</items>
+				</frameList>
+				<grantTimesList>
+					<items>
+						<period periodNo="1" year="0" month="6" grantDays="10" baseDate="入社日"/>
+						<period periodNo="2" year="1" month="6" grantDays="12" baseDate="入社日"/>
+						<period periodNo="3" year="2" month="6" grantDays="14" baseDate="入社日"/>
+						<period periodNo="4" year="3" month="6" grantDays="16" baseDate="入社日"/>
+						<period periodNo="5" year="4" month="6" grantDays="18" baseDate="入社日"/>
+						<period periodNo="6" year="5" month="6" grantDays="20" baseDate="入社日"/>
+					</items>
+				</grantTimesList>
+			</vacation>
+			<vacation code="02" name="比例付与" calStandardForAnnualWorkingDays="KMF003_17" annualVacationGrantCriteria="KMF003_21" >
+				<frameList>
+					<items>
+						<frame frame="KMF003_23" value="70" useSettingOfFrame="true"/>
+					</items>
+				</frameList>
+				<grantTimesList>
+					<items>
+						<period periodNo="1" year="0" month="2" grantDays="12" baseDate="入社日"/>
+						<period periodNo="2" year="1" month="0" grantDays="12" baseDate="入社日"/>
+						<period periodNo="3" year="2" month="0" grantDays="12" baseDate="入社日"/>
+						<period periodNo="4" year="3" month="0" grantDays="13" baseDate="入社日"/>
+						<period periodNo="5" year="4" month="0" grantDays="13" baseDate="入社日"/>
+						<period periodNo="6" year="5" month="0" grantDays="13" baseDate="入社日"/>
+					</items>
+				</grantTimesList>	
+			</vacation>
+		</items>
+	</ListAnnualVacation>
+</DATA>										

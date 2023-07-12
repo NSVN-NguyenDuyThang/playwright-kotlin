@@ -1,0 +1,47 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListWorktype>
+		<items>
+	 		<worktype code="001" name="1日出勤" shortName ="1日出" workTypeUnit="KMK007_19" workTypeCls="出勤" ></worktype>
+			<worktype code="002" name="日曜日" shortName ="日曜日" workTypeUnit="KMK007_19" workTypeCls="休日" holidayCls="法定内休日" ></worktype>
+			<worktype code="003" name="土曜日" shortName ="土曜日" workTypeUnit="KMK007_19" workTypeCls="休日" holidayCls="法定外休日" ></worktype>
+			<worktype code="004" name="年休" shortName ="年休" workTypeUnit="KMK007_19" workTypeCls="年休" ></worktype>
+			<worktype code="005" name="積立年休" shortName ="積立年" workTypeUnit="KMK007_19" workTypeCls="積立年休" ></worktype>
+			<worktype code="006" name="特別休暇" shortName ="特別休" workTypeUnit="KMK007_19" workTypeCls="特別休暇" ></worktype>
+			<worktype code="007" name="欠勤" shortName ="欠勤" workTypeUnit="KMK007_19" workTypeCls="欠勤" holidayCls="子の看護休暇" ></worktype>
+			<worktype code="008" name="代休" shortName ="代休" workTypeUnit="KMK007_19" workTypeCls="代休" holidayCls="法定内休日" ></worktype>
+			<worktype code="009" name="代休" shortName ="代休" workTypeUnit="KMK007_19" workTypeCls="代休" holidayCls="法定外休日" ></worktype>
+			<worktype code="010" name="振出" shortName ="振出" workTypeUnit="KMK007_19" workTypeCls="振出" >
+				<optionsListOneDay>
+					<items option1="KMK007_27"></items>
+				</optionsListOneDay>
+			</worktype>
+			<worktype code="011" name="振休" shortName ="振休" workTypeUnit="KMK007_19" workTypeCls="振休" holidayCls="法定内休日" ></worktype>
+			<worktype code="012" name="振休" shortName ="振休" workTypeUnit="KMK007_19" workTypeCls="振休" holidayCls="法定外休日" ></worktype>
+			<worktype code="015" name="休日出勤" shortName ="休日出" workTypeUnit="KMK007_19" workTypeCls="休日出勤" holidayCls="法定内休日" ></worktype>
+			<worktype code="016" name="休日出勤" shortName ="休日出" workTypeUnit="KMK007_19" workTypeCls="休日出勤" holidayCls="法定外休日" ></worktype>
+			<worktype code="017" name="休日出勤" shortName ="休日出" workTypeUnit="KMK007_19" workTypeCls="休日出勤" >
+				<optionsListOneDay>
+					<items option1="KMK007_26"></items>
+				</optionsListOneDay>
+			</worktype>
+			<worktype code="018" name="休日出勤" shortName ="休日出" workTypeUnit="KMK007_19" workTypeCls="休日出勤" >
+				<optionsListOneDay>
+					<items option1="KMK007_27"></items>
+				</optionsListOneDay>
+			</worktype> 	
+			<worktype code="021" name="半出年" shortName ="半出年" workTypeUnit="KMK007_20" workTypeMorningCls="出勤" workTypeAfternoonCls="年休" ></worktype>
+			<worktype code="022" name="年休1" shortName ="年休1" workTypeUnit="KMK007_20" workTypeMorningCls="年休" workTypeAfternoonCls="出勤" ></worktype>
+			<worktype code="023" name="半出年1" shortName ="半出年" workTypeUnit="KMK007_20" workTypeMorningCls="出勤" workTypeAfternoonCls="振休" >
+				<optionsListAfternoon>
+					<items option1="KMK007_27"></items>
+				</optionsListAfternoon>
+			</worktype>
+			<worktype code="024" name="振出" shortName ="振出" workTypeUnit="KMK007_20" workTypeMorningCls="振出" workTypeAfternoonCls="出勤" >
+				<optionsListMorning>
+					<items option1="KMK007_27" ></items>
+				</optionsListMorning>
+			</worktype>
+		</items>
+	</ListWorktype>
+</DATA>

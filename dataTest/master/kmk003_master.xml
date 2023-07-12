@@ -1,0 +1,197 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListWorkTime>
+		<items>
+			<worktime code="001" name="固定勤務用" subName="固定勤" workTimeCategory="通常勤務・変形労働用" settingMethod="固定勤務">
+				<predeterminedTab dayStartTime="8:00" rangeHoursPerDay="24" useWorkingHours2="false" endTimeOfMorningShift="12:00" startTimeOfAfternoonShift="13:00" workingHour1Day="8:00" workingHourMorning="4:00" workingHourAfternoon="4:00">
+					<workingHours start="8:00" end="17:00"/>
+				</predeterminedTab>
+				<workingHoursTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="8:00" end="17:00"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</workingHoursTab>
+				<overtimeTab settingForHalfday="false" automaticCalculate="false">
+					<overTimeList>
+						<items>
+							<overTime start="18:00" end="23:30"/>
+						</items>
+					</overTimeList>
+				</overtimeTab>
+				<breaktimeTab settingForHalfday="false">
+					<breakTimeList>
+						<items>
+							<breakTime start="12:00" end="13:00"/>
+						</items>
+					</breakTimeList>	
+				</breaktimeTab>
+				<vacationHoursTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="8:00" end="17:00"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</vacationHoursTab>
+				<vacationBreakTab>
+					<vacationBreakTimeList>
+						<items>
+							<vacationBreakTime start="12:00" end="13:00"/>
+						</items>
+					</vacationBreakTimeList>
+				</vacationBreakTab>
+				<compensatoryVacationTab checkToVacationWork="true" oneDayTime="8:00" halfDayTime="4:00"/>
+			</worktime>
+			
+			<worktime code="002" name="流動勤務用" subName="流動勤" workTimeCategory="通常勤務・変形労働用" settingMethod="流動勤務">
+				<predeterminedTab dayStartTime="8:00" rangeHoursPerDay="24" useWorkingHours2="false" endTimeOfMorningShift="11:45" startTimeOfAfternoonShift="12:45" workingHour1Day="8:00" workingHourMorning="3:30" workingHourAfternoon="4:30">
+					<workingHours start="8:15" end="17:15"/>
+				</predeterminedTab>
+				<overtimeTab automaticCalculate="false">
+					<elapsedTimeList>
+						<items elapsedTime1="0:15"/>
+					</elapsedTimeList>
+				</overtimeTab>
+				<breaktimeTab fixedBreaktime="true">
+					<breakTimeList>
+						<items>
+							<breakTime start="11:45" end="12:45"/>
+						</items>
+					</breakTimeList>	
+				</breaktimeTab>
+				<vacationHoursTab>
+					<elapsedTimeList>
+						<items elapsedTime1="0:15"/>	
+					</elapsedTimeList>
+				</vacationHoursTab>
+				<vacationBreakTab fixedBreaktime="true">
+					<vacationBreakTimeList>
+						<items>
+							<vacationBreakTime start="11:45" end="12:45"/>
+						</items>
+					</vacationBreakTimeList>
+				</vacationBreakTab>
+				<compensatoryVacationTab checkToVacationWork="true" oneDayTime="8:00" halfDayTime="4:00"/>
+			</worktime> 
+			
+			<worktime code="003" name="固定勤務2" subName="固定2" workTimeCategory="通常勤務・変形労働用" settingMethod="固定勤務">
+				<predeterminedTab dayStartTime="8:00" rangeHoursPerDay="24" useWorkingHours2="true" endTimeOfMorningShift="12:00" startTimeOfAfternoonShift="12:45" workingHour1Day="8:00" workingHourMorning="3:30" workingHourAfternoon="4:30">
+					<workingHours start="8:30" end="17:30"/>
+					<workingHours2 start="20:00" end="24:00"/>
+				</predeterminedTab>
+				<workingHoursTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="8:30" end="17:30"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</workingHoursTab>
+				<overtimeTab settingForHalfday="false" automaticCalculate="false">
+					<overTimeList>
+						<items>
+							<overTime start="18:00" end="20:00"/>
+						</items>
+					</overTimeList>
+				</overtimeTab>
+				<breaktimeTab settingForHalfday="false">
+					<breakTimeList>
+						<items>
+							<breakTime start="12:00" end="12:30"/>
+						</items>
+					</breakTimeList>
+				</breaktimeTab>
+				<vacationHoursTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="8:30" end="17:30"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</vacationHoursTab>
+				<vacationBreakTab>
+					<vacationBreakTimeList>
+						<items>
+							<vacationBreakTime start="12:00" end="12:30"/>
+						</items>
+					</vacationBreakTimeList>
+				</vacationBreakTab>
+				<compensatoryVacationTab checkToVacationWork="true" oneDayTime="8:00" halfDayTime="4:00"/>
+			</worktime>
+			
+			<worktime code="004" name="フレックス勤" subName="フレッ" workTimeCategory="フレックス勤務用">
+				<predeterminedTab dayStartTime="7:00" rangeHoursPerDay="24" usedCoreTimeZone="true" endTimeOfMorningShift="12:00" startTimeOfAfternoonShift="13:00" workingHour1Day="8:00">
+					<coreTimeZone start="12:00" end="14:00"/>
+					<workingHours start="7:00" end="18:00"/>
+				</predeterminedTab>
+				<flextimeTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="7:00" end="18:00"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</flextimeTab>
+				<overtimeTab>
+					<overTimeList>
+						<items>
+							<overTime start="18:00" end="20:00"/>
+						</items>
+					</overTimeList>
+				</overtimeTab>
+				<breaktimeTab fixedBreaktime="true">
+					<breakTimeList>
+						<items>
+							<breakTime start="12:00" end="13:00"/>
+						</items>
+					</breakTimeList>
+				</breaktimeTab>
+				<vacationHoursTab>
+					<oneDayWorkingTimeList>
+						<items>
+							<oneDayWorkingTime start="7:00" end="18:00"/>
+						</items>
+					</oneDayWorkingTimeList>
+				</vacationHoursTab>
+				<vacationBreakTab fixedBreaktime="true">
+					<vacationBreakTimeList>
+						<items>
+							<vacationBreakTime start="12:00" end="13:00"/>
+						</items>
+					</vacationBreakTimeList>
+				</vacationBreakTab>
+				<compensatoryVacationTab checkToVacationWork="true" oneDayTime="8:00" halfDayTime="4:00"/>
+			</worktime>
+			
+			<worktime code="005" name="流動勤務2" subName="流動２" workTimeCategory="通常勤務・変形労働用" settingMethod="流動勤務">
+				<predeterminedTab dayStartTime="8:00" rangeHoursPerDay="24" useWorkingHours2="true" endTimeOfMorningShift="11:45" startTimeOfAfternoonShift="12:45" workingHour1Day="8:00" workingHourMorning="3:30" workingHourAfternoon="4:30">
+					<workingHours start="8:15" end="17:17"/>
+					<workingHours2 start="19:30" end="23:30"/>
+				</predeterminedTab>
+				<overtimeTab automaticCalculate="false">
+					<elapsedTimeList>
+						<items elapsedTime1="0:15"/>
+					</elapsedTimeList>
+				</overtimeTab>
+				<breaktimeTab fixedBreaktime="true">
+					<breakTimeList>
+						<items>
+							<breakTime start="12:00" end="13:00"/>
+						</items>
+					</breakTimeList>
+				</breaktimeTab>
+				<vacationHoursTab>
+					<elapsedTimeList>
+						<items elapsedTime1="0:15"/>
+					</elapsedTimeList>
+				</vacationHoursTab>
+				<vacationBreakTab fixedBreaktime="true">
+					<vacationBreakTimeList>
+						<items>
+							<vacationBreakTime start="11:45" end="12:45"/>
+						</items>
+					</vacationBreakTimeList>
+				</vacationBreakTab>
+				<compensatoryVacationTab checkToVacationWork="true" oneDayTime="8:00" halfDayTime="4:00"/>
+			</worktime>
+		</items>
+	</ListWorkTime>
+</DATA>

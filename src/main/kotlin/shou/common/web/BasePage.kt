@@ -10,7 +10,10 @@ import com.microsoft.playwright.options.WaitUntilState
 import io.qameta.allure.Allure
 import io.qameta.allure.Step
 import java.io.ByteArrayInputStream
-import java.util.concurrent.Callable
+import java.util.stream.Collectors
+
+
+
 
 /**
  *
@@ -94,6 +97,11 @@ open class BasePage {
         return page.frameLocator(getDynamicSelector(CommonUI.IFRAME, frameTitle)).first() ?: throw PlaywrightException("No such frame with $frameTitle title")
     }
 
+    internal fun getVisibleFrame(): FrameLocator {
+        return page.frameLocator(CommonUI.VISIBLE_IFRAME).first()
+    }
+
+
     /**
      * get text resource
      * @param textRsId
@@ -163,6 +171,7 @@ open class BasePage {
     @Step("{0}")
     protected fun addStep(step: String, runnable: Runnable) {
         runnable.run()
+        takeScreenshot(step)
     }
 
     internal fun fillToElement(selector: String?, value: String?) {
@@ -325,6 +334,19 @@ open class BasePage {
         waitForJQueryAndJSLoadedSuccess()
     }
 
+    internal fun isErrorDialogDisplayed(): Boolean {
+        return page.locator(CommonUI.ERROR_DIALOG).isVisible
+    }
+    internal fun getMsgIdAndCloseErrorDialog(): List<String> {
+        openErrorDialog()
+        val msgIds = page.locator(CommonUI.MSG_ID_ERROR_DIALOG).all().map { it.innerText() }
+        clickToElement(CommonUI.BUTTON, "閉じる")
+        return msgIds
+    }
+
+    protected fun openErrorDialog() {
+        clickToElement(CommonUI.ERROR_DIALOG)
+    }
     internal fun clickToButton(textRsId: String) {
         clickToButtonName(getTextResource(textRsId))
     }
@@ -347,7 +369,7 @@ open class BasePage {
     companion object {
         internal const val CHECK_TO_CHECKBOX = ""
         internal const val CHECK_TO_SWITCH_BOX = ""
-        internal const val CHECK_TO_RADIO_BUTTON = ""
+        internal const val CHECK_TO_RADIO_BUTTON = "Select option 「%s」"
         internal const val SELECT_FROM_COMBOBOX = ""
         internal const val SELECT_DATE_TIME_VALUE = ""
     }

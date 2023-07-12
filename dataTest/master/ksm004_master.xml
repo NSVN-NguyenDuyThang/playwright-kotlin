@@ -1,0 +1,44 @@
+<?xml version = "1.0" ?>
+<DATA>
+    <calendarRegistration>
+        <items>
+            <collectiveSetting code="">
+                <yearMonth value="2023/06"></yearMonth>
+                <timePeriodStart value="2023/05"></timePeriodStart>
+                <timePeriodEnd value="2023/12"></timePeriodEnd>
+                <monday value="稼働日"></monday>
+                <tuesday value="稼働日"></tuesday>
+                <wednesday value="稼働日"></wednesday>
+                <thursday value="稼働日"></thursday>
+                <friday value="稼働日"></friday>
+                <saturday value="法定外休日"></saturday>
+                <sunday value="法定休日"></sunday>
+            </collectiveSetting>
+            <collectiveSetting code="0000000231">
+                <yearMonth value="2023/06"></yearMonth>
+                <timePeriodStart value="2023/05"></timePeriodStart>
+                <timePeriodEnd value="2023/12"></timePeriodEnd>
+                <monday value="稼働日"></monday>
+                <tuesday value="稼働日"></tuesday>
+                <wednesday value="稼働日"></wednesday>
+                <thursday value="稼働日"></thursday>
+                <friday value="法定外休日"></friday>
+                <saturday value="法定休日"></saturday>
+                <sunday value="稼働日"></sunday>
+            </collectiveSetting>
+            <collectiveSetting code="0000000001">
+                <yearMonth value="2023/06"></yearMonth>
+                <timePeriodStart value="2023/05"></timePeriodStart>
+                <timePeriodEnd value="2023/12"></timePeriodEnd>
+                <monday value="稼働日"></monday>
+                <tuesday value="法定外休日"></tuesday>
+                <wednesday value="稼働日"></wednesday>
+                <thursday value="稼働日"></thursday>
+                <friday value="稼働日"></friday>
+                <saturday value="法定休日"></saturday>
+                <sunday value="稼働日"></sunday>
+            </collectiveSetting>
+        </items>
+    </calendarRegistration>
+    <employeeLoginCD>10000010</employeeLoginCD>
+</DATA>

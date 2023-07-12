@@ -1,0 +1,10 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<WorkSettingList>
+		<items>
+			<setting title="フレックス勤務" titleTextRsId="CMM029_7" used="true"/>
+			<setting title="変形労働勤務" titleTextRsId="CMM029_8" used="true"/>
+			<setting title="複数回勤務" titleTextRsId="CMM029_9" used="true"/>
+		</items>
+	</WorkSettingList>
+</DATA>

@@ -1,0 +1,15 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<ListEmployment>
+		<items>
+			<employment code="01" name="取締役" externalCode="01" memo="取締役" />
+			<employment code="02" name="執行役員" externalCode="02" memo="執行役員" />
+			<employment code="03" name="部長" />
+			<employment code="04" name="課長" />
+			<employment code="05" name="係長" />
+			<employment code="06" name="主任" />
+			<employment code="07" name="一般社員" />
+			<employment code="08" name="アルバイト" />
+		</items>
+	</ListEmployment>
+</DATA>
