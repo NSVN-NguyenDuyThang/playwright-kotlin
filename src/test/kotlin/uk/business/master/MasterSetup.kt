@@ -75,7 +75,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var ksm006: Ksm006Page
     private lateinit var kaf022: Kaf022Page
 
-    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
+    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class, description = "test_001_CMM029-機能の選択 - 勤務の設定")
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
         cmm029a = createInstance(Cmm029aPage::class.java)
         cmm029a.openPageUrl(domain + PathList.CMM029A.value)
@@ -133,7 +133,7 @@ class MasterSetup() : BaseTest() {
         }
     }
 
-    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORKPLACE_DATA", dataProviderClass = MasterDataProvider::class)
+    @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORKPLACE_DATA", dataProviderClass = MasterDataProvider::class, description = "test_007_CMM011-職場情報の登録")
     fun step007_cmm011_addWorkplace(period: Period, workplaceList: ListWorkplace) {
         cmm011a = createInstance(Cmm011aPage::class.java)
         cmm011a.openPageUrl(Companion.domain + PathList.CMM011A.value)
