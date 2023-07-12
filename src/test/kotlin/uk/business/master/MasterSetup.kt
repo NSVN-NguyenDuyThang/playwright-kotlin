@@ -29,6 +29,8 @@ import shou.page.web.cps001.CategorySetting
 import shou.page.web.cps001.Cps001Page
 import shou.page.web.cps002.Cps002Page
 import shou.page.web.cps002.EmployeeSettingList
+import shou.page.web.kaf022.Approve
+import shou.page.web.kaf022.Kaf022Page
 import shou.page.web.kmf001.Kmf001Page
 import shou.page.web.kmf003.AnnualVacation
 import shou.page.web.kmf003.Kmf003Page
@@ -71,6 +73,7 @@ class MasterSetup() : BaseTest() {
     private lateinit var cas013: Cas013Page
     private lateinit var ksm004: Ksm004Page
     private lateinit var ksm006: Ksm006Page
+    private lateinit var kaf022: Kaf022Page
 
     @Test(groups = [LOGIN_DEFAULT], dataProvider = "WORK_SETTING_DATA", dataProviderClass = MasterDataProvider::class)
     fun step001_cmm029_workSetting(workSettingList: WorkSettingList) {
@@ -446,6 +449,13 @@ class MasterSetup() : BaseTest() {
         Assert.assertEquals(messCompany, "Msg_15")
         Assert.assertEquals(messWorkplace, "Msg_15")
         Assert.assertEquals(messClass, "Msg_15")
+    }
+
+    @Test(description = "test_021_KAF022_申請の設定", groups = [LOGIN_OTHER], dataProvider = "KAF022_MASTER", dataProviderClass = MasterDataProvider::class)
+    fun step021_kaf022(approve: Approve) {
+        kaf022 = createInstance(Kaf022Page::class.java)
+        kaf022.openPageUrl(domain + PathList.KAF022.value)
+        Assert.assertEquals(kaf022.settingApprove(approve), "Msg_15")
     }
 
 }

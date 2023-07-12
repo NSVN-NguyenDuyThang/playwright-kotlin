@@ -25,6 +25,8 @@ import shou.page.web.cps001.CategorySetting
 import shou.page.web.cps001.EmployeeList
 import shou.page.web.cps002.CPS002RegisterEmployee
 import shou.page.web.cps002.EmployeeSettingList
+import shou.page.web.kaf022.Approve
+import shou.page.web.kaf022.KAF002Master
 import shou.page.web.kmf003.Kmf003Master
 import shou.page.web.kmf003.ListAnnualVacation
 import shou.page.web.kmk003.Kml003Master
@@ -191,7 +193,7 @@ class MasterDataProvider {
     }
 
     @DataProvider(name = "KSM006_MASTER")
-    fun test_016_ksm006(): Array<Any>? {
+    fun ksm006(): Array<Any>? {
         val data: Map<String, Any> = readFile(KSM006Master(), "master", "ksm006_master.xml")
         val company: Company = data["company"] as Company
         val workplace: Workplace = data["workplace"] as Workplace
@@ -199,5 +201,14 @@ class MasterDataProvider {
         val dataRegisterWork = DataRegisterWork(company, workplace, classification)
         BaseTest.Companion.loginOther = BaseTest.employees[data["employeeLoginCD"]]
         return arrayOf(dataRegisterWork)
+    }
+
+    @DataProvider(name = "KAF022_MASTER")
+    fun kaf022(): Array<Any?>? {
+        val data: Map<String, Any> = readFile(KAF002Master(), "master", "kaf022_master.xml")
+        val  employeeLoginCD = data["employeeLoginCD"] as String
+        val approve = data["approve"] as Approve
+        BaseTest.Companion.loginOther = BaseTest.Companion.employees?.get(employeeLoginCD)
+        return arrayOf(approve)
     }
 }

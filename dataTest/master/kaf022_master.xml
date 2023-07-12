@@ -1,0 +1,5 @@
+<?xml version = "1.0" ?>
+<DATA>
+	<Approve title="許可する" textRecourseId="KAF022_272"/>
+	<EmployeeLoginCD>10000010</EmployeeLoginCD>
+</DATA>
