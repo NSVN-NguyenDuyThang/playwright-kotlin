@@ -66,7 +66,7 @@ class TreeGrid(override var page: Page, private val wrapper: String) : BasePage(
         }
     }
 
-    private fun getNodeText(node: Locator?): String? = node?.locator("td")?.innerText()
+    private fun getNodeText(node: Locator?): String? = node?.locator("td")?.first()?.innerText()
 
     companion object {
         private const val NODE = "//tr[@data-id]"
