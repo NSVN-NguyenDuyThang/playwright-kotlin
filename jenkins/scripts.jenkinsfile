@@ -22,14 +22,22 @@ pipeline {
 }
 
 def setupParam(){
-    
+     properties([parameters([
+            string(defaultValue: '000000000001', description: '契約コード', name: 'Contract_CD'),
+            string(defaultValue: '0', description: '契約パスワード', name: 'Contract_Password'),
+            string(defaultValue: '0001', description: '会社コード', name: 'Company_Code'),
+            string(defaultValue: 'system', description: '社員コード', name: 'Employee_Code'),
+            string(defaultValue: 'kinjirou', description: '社員パスワード', name: 'Employee_Password'),
+            string(defaultValue: 'http://192.168.100.78:8080/', description: 'テスト環境', name: 'Server_URL'),
+    	    booleanParam(defaultValue: true, description: 'checked: Cloud mode', name: 'isCloud')])])
 }
 
 def runTest(){
     try{
-        bat 'mvn clean test'
+        bat 'mvn clean test -DcontractCD=%Contract_CD% -DcontractPW=%Contract_Password% -DcompanyCode=%Company_Code% -DemployeeCode=%Employee_Code% -DemployeePW=%Employee_Password% -Ddomain=%Server_URL% -DisCloudEnv=%isCloud%'
     }
-    catch(Exception ex){
+    catch(Exception ex){
+
         echo "Failed"
     }
 }
