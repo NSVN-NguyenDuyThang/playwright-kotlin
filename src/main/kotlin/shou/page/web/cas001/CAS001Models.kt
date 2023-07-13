@@ -1,7 +1,7 @@
 package shou.page.web.cas001
 
-import shou.page.web.cas005.ItemValue
 import shou.utils.model.AggregateModel
+import shou.utils.model.ItemValue
 
 
 data class RoleSetting(val rowSelect: ItemValue? = null) {}

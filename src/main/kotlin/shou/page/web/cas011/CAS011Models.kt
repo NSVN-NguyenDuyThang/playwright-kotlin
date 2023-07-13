@@ -1,7 +1,7 @@
 package shou.page.web.cas011
 
-import shou.page.web.cas005.ItemValue
 import shou.utils.model.AggregateModel
+import shou.utils.model.ItemValue
 
 
 data class DataCas011(val dataRegister: DataRegister? = null) : AggregateModel() {}

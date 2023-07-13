@@ -7,6 +7,7 @@ import shou.common.web.element.igcombo.IgCombo
 import shou.common.web.element.iggrid.IgGrid
 import shou.common.web.element.radiobutton.RadioButton
 import shou.common.web.element.switchbox.SwitchBox
+import shou.utils.model.ItemValue
 
 class Cas005Page() : BasePage() {
 

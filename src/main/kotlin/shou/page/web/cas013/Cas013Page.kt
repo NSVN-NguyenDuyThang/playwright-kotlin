@@ -5,7 +5,7 @@ import io.qameta.allure.Step
 import shou.common.web.BasePage
 import shou.common.web.element.igcombo.IgCombo
 import shou.common.web.element.iggrid.IgGrid
-import shou.page.web.cas005.ItemValue
+import shou.utils.model.ItemValue
 
 
 class Cas013Page() : BasePage() {

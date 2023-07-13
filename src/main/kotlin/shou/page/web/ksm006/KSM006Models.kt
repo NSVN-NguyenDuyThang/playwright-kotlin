@@ -1,6 +1,6 @@
 package shou.page.web.ksm006
 
-import shou.page.web.cas005.ItemValue
+import shou.utils.model.ItemValue
 
 
 data class GridSelected(val code: String? = null, val worktypes: List<ItemValue>? = null) {}

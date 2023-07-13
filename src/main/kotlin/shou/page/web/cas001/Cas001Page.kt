@@ -5,7 +5,7 @@ import io.qameta.allure.Step
 import shou.common.web.BasePage
 import shou.common.web.element.iggrid.IgGrid
 import shou.common.web.element.radiobutton.RadioButton
-import shou.page.web.cas005.ItemValue
+import shou.utils.model.ItemValue
 
 class Cas001Page() : BasePage() {
     fun clickButtonSave() {

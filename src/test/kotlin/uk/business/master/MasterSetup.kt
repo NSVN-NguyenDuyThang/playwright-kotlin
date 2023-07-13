@@ -185,13 +185,13 @@ class MasterSetup() : BaseTest() {
         cas005.clickTab(role.titleTextRsId)
         val isExist: Boolean? = cas005.checkCodeGridIsExist(role.code!!.value!!)
         if (isExist == true) {
-            cas005.selectRowEdit(role.code)
+            cas005.selectRowEdit(role.code!!)
             cas005.clickButtonDelete()
             cas005.getMessageResult()
         }
         cas005.clickTab(role.titleTextRsId)
         cas005.clickButtonNew()
-        cas005.inputCode(role.code)
+        cas005.inputCode(role.code!!)
         cas005.inputName(role.name!!)
         cas005.selectComboEmployeeRefRange(role.employeeReferenceRange!!)
         cas005.selectApprovalAuthority(role.approvalAuthority!!)
@@ -222,10 +222,10 @@ class MasterSetup() : BaseTest() {
         cas011 = createInstance(Cas011Page::class.java)
         cas011.openPageUrl(domain + PathList.CAS011.value)
         if (cas011.isExistGridRole(dataRegister.code?.value!!)) {
-            Assert.assertTrue(true, String.format("コード「%s」は存在します」", dataRegister.code.value))
+            Assert.assertTrue(true, String.format("コード「%s」は存在します」", dataRegister.code!!.value!!))
         } else {
             cas011.clickButtonNew()
-            cas011.inputCode(dataRegister.code)
+            cas011.inputCode(dataRegister.code!!)
             cas011.inputName(dataRegister.code)
             cas011.selectGrid1(dataRegister.selection?.selectables!!)
             cas011.clickButtonMoveForward()
@@ -253,7 +253,7 @@ class MasterSetup() : BaseTest() {
         //Step 2.
         ksm005.clickButtonCreateNew()
         //Step 3
-        ksm005.inputCodeName(monthlyPattern.patternCode.value, monthlyPattern.patternName?.value!!)
+        ksm005.inputCodeName(monthlyPattern.patternCode!!.value!!, monthlyPattern.patternName?.value!!)
         //Step 4
         ksm005.clickButtonRegister()
         //Step 5 and 6
@@ -367,7 +367,7 @@ class MasterSetup() : BaseTest() {
         val messCompany: String = ksm004.clickButtonSaveCompany()
 
         //tab workplace
-        val wplSetting = calendarRegistration.items[1]
+        val wplSetting = calendarRegistration.items[1]!!
         val workplaceCode = wplSetting.code!!.value
         ksm004.selectTabWorkplace()
         ksm004.selectRowWorkplaceCode(workplaceCode!!)
