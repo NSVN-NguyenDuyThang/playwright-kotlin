@@ -39,7 +39,7 @@ enum class BrowserFactory {
             optLst.add("--auto-open-devtools-for-tabs")
         }
         return LaunchOptions()
-            .setHeadless(false)
+            .setHeadless(true)
             .setArgs(optLst)
             .setDownloadsPath(Paths.get(GlobalConstants.downloadPath))
     }

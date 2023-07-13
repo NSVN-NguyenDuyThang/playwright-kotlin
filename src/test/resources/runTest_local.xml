@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite  name="UK" parallel = "tests" thread-count="4" >
-	<parameter name ="contractCD" value ="${contractCD}" />
-	<parameter name ="contractPW" value ="${contractPW}" />
-	<parameter name ="companyCode" value ="${companyCode}" />
-	<parameter name ="employeeCode" value ="${employeeCode}" />
-	<parameter name ="employeePW" value ="${employeePW}" />
-	<parameter name ="domain" value = "${domain}" />
-	<parameter name="cloudEnv" value="${isCloudEnv}"></parameter>
+	<parameter name ="contractCD" value ="000000000002" />
+	<parameter name ="contractPW" value ="0" />
+	<parameter name ="companyCode" value ="2002" />
+	<parameter name ="employeeCode" value ="system" />
+	<parameter name ="employeePW" value ="kinjirou" />
+	<parameter name ="domain" value = "http://192.168.100.78:8080/" />
+	<parameter name="cloudEnv" value="true"></parameter>
 	<parameter name ="webMode" value="true"/>
 
 	<listeners>
@@ -19,6 +19,10 @@
 		<parameter name ="browser" value ="chromium" />
 		<classes>
 			<class name="uk.business.master.MasterSetup">
+<!--				<methods>-->
+<!--					<include name="step001_cmm029_workSetting"></include>-->
+<!--					<include name="step021_kaf022"></include>-->
+<!--				</methods>-->
 			</class>
 		</classes>
 	</test>
