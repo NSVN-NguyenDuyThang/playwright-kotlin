@@ -131,7 +131,7 @@ class MasterDataProvider {
         val data: Map<String, Any> = readFile(Cas011Master(), "master", "cas011_master.xml")
         val result = arrayListOf<DataRegister>()
         val dataCas011 = data["dataRegister"] as DataCas011
-        result.add(dataCas011?.dataRegister!!)
+        result.add(dataCas011.dataRegister!!)
         return result.map { arrayOf(it) }.toTypedArray()
     }
 
@@ -208,7 +208,7 @@ class MasterDataProvider {
         val data: Map<String, Any> = readFile(KAF002Master(), "master", "kaf022_master.xml")
         val  employeeLoginCD = data["employeeLoginCD"] as String
         val approve = data["approve"] as Approve
-        BaseTest.Companion.loginOther = BaseTest.Companion.employees?.get(employeeLoginCD)
+        BaseTest.Companion.loginOther = BaseTest.Companion.employees.get(employeeLoginCD)
         return arrayOf(approve)
     }
 }
