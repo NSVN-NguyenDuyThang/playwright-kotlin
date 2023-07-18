@@ -357,7 +357,7 @@ class MasterSetup() : BaseTest() {
         val yearMonth: String = DataFaker.getSystemYearMonth() //get system date
         val endDate: String = DataFaker.addMonthsFromSystemDate(6) //get system date + 6 month
         //tab company
-        val companySetting = calendarRegistration.items[0]
+        val companySetting = calendarRegistration.items!![0]
         ksm004.selectTabCompany()
         ksm004.inputDateTabCompany(yearMonth)
         ksm004.clickOpenDialogKSM004D()
@@ -367,7 +367,7 @@ class MasterSetup() : BaseTest() {
         val messCompany: String = ksm004.clickButtonSaveCompany()
 
         //tab workplace
-        val wplSetting = calendarRegistration.items[1]
+        val wplSetting = calendarRegistration.items[1]!!
         val workplaceCode = wplSetting.code!!.value
         ksm004.selectTabWorkplace()
         ksm004.selectRowWorkplaceCode(workplaceCode!!)
